@@ -37,5 +37,53 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
             IEnumerable<Booking> bookings = bookingList.GetAll();
             return View(bookings);
         }
+
+        // als de maanden van de checkindatum en gekozen datum hetzelfe zijn, toon alle boekingen in die maand.
+        public ActionResult ShowBookingPeriod(DateTime date)
+        {
+            List<Booking> booking = new List<Booking>();
+            IEnumerable<Booking> bookings = null;
+
+            foreach (Booking b in bookingList.GetAll())
+            {
+                if (b.CheckInDatum.Month == date.Month)
+                {
+                    booking.Add(b);
+                }
+            }
+
+            bookings = booking;
+
+            return View(bookings);
+        }
+
+        // ga naar de pagina waar je de gekozen boeking kunt wijzigen.
+        public ActionResult EditBooking(int sleutel)
+        {
+            Booking editBooking = bookingList.GetBooking(sleutel);
+
+            return View(editBooking);
+        }
+
+        [HttpPost]
+        public ActionResult EditBooking(Booking booking)
+        {
+            bookingList.EditBooking(booking);
+            return RedirectToAction("ShowBookings");
+        }
+
+        public ActionResult DeleteBooking(int sleutel)
+        {
+            Booking booking = bookingList.GetBooking(sleutel);
+
+            return View(booking);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBooking(Booking booking)
+        {
+            bookingList.DeleteBooking(booking);
+            return RedirectToAction("ShowBookings");
+        }
     }
 }

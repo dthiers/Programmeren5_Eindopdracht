@@ -9,6 +9,7 @@ namespace DomainModel
     public class Booking
     {
         [Key]
+        public int Sleutel { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }

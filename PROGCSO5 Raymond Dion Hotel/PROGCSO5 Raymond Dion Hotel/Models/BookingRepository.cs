@@ -25,5 +25,46 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Models
             bookingContext.Bookings.Add(booking);
             bookingContext.SaveChanges();
         }
+
+        // geef de gekozen boeking terug. Boekingen zijn uniek door een sleutel dus geef de boeking als de sleutel matched.
+        public Booking GetBooking(int sleutel)
+        {
+            Booking retBooking = null;
+
+            foreach (Booking b in bookingContext.Bookings)
+            {
+                if (b.Sleutel == sleutel)
+                {
+                    retBooking = b;
+                }
+            }
+            return retBooking;
+        }
+
+        // wijzig de gegevens van de gekozen boeking.
+        public void EditBooking(Booking booking)
+        {
+            foreach (Booking b in bookingContext.Bookings)
+            {
+                if (b.Sleutel == booking.Sleutel)
+                {
+                    bookingContext.Entry(b).CurrentValues.SetValues(booking);
+                }
+            }
+            bookingContext.SaveChanges();
+        }
+
+        // verwijder de gekozen boeking.
+        public void DeleteBooking(Booking booking)
+        {
+            foreach (Booking b in bookingContext.Bookings)
+            {
+                if (b.Sleutel == booking.Sleutel)
+                {
+                    bookingContext.Bookings.Remove(b);
+                }
+            }
+            bookingContext.SaveChanges();
+        }
     }
 }

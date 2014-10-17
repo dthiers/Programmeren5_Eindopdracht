@@ -140,7 +140,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
-    <Compile Include="Models\HotelRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +229,9 @@
     <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Booking\ShowBookings.cshtml" />
     <Content Include="Views\Booking\CreateBooking.cshtml" />
+    <Content Include="Views\Booking\DeleteBooking.cshtml" />
+    <Content Include="Views\Booking\EditBooking.cshtml" />
+    <Content Include="Views\Booking\ShowBookingPeriod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
