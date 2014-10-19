@@ -55,5 +55,31 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Models
             }
             bookingContext.SaveChanges();
         }
+
+        public Booking CalculatePrice(Booking booking)
+        {
+            int price = 0;
+
+            DateTime startHoogTarief = new DateTime(2014, 6, 1);
+            DateTime eindHoogTarief = new DateTime(2014, 8, 31);
+
+            // als het hoog tarief is is de prijs 90 euro per nacht
+            // anders 60 euro per nacht (deze waardes zijn verzonnen)
+            for (DateTime date = booking.CheckInDatum; date <= booking.CheckOutDatum; date = date.AddDays(1))
+            {
+                if (date.Month >= startHoogTarief.Month && date.Month <= eindHoogTarief.Month)
+                {
+                    price += 90;
+                }
+                else
+                {
+                    price += 60;
+                }
+            }
+
+            booking.Prijs = price;
+
+            return booking;
+        }
     }
 }

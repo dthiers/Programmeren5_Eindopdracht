@@ -227,12 +227,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Hotel\Index.cshtml" />
-    <Content Include="Views\Booking\CreateBooking.cshtml" />
     <Content Include="Views\Booking\ShowBookingPeriod.cshtml" />
     <Content Include="Views\Booking\EditBooking.cshtml" />
-    <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\DetailsBooking.cshtml" />
     <Content Include="Views\Booking\ShowBookings.cshtml" />
+    <Content Include="Views\Booking\CreateBooking.cshtml" />
+    <Content Include="Views\Booking\DeleteBooking.cshtml" />
+    <Content Include="Views\Booking\PriceDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

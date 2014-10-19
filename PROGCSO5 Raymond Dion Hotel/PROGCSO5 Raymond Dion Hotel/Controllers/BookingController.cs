@@ -26,7 +26,6 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
             return View(new Booking());
         }
 
-        [HttpPost]
         public ActionResult CreateBooking(Booking booking)
         {
             if (booking != null)
@@ -35,8 +34,21 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
                 return RedirectToAction("Index", "Hotel");
             }
 
-            return View(new Booking());
+            return View();
         }
+
+        /*
+        [HttpPost]
+        public ActionResult CreateBooking(Booking booking)
+        {
+            if (booking != null)
+            {
+                return RedirectToAction("PriceDetail", "Booking", new { newBooking = booking });
+            }
+
+            return View();
+        }
+         * */
 
         public ActionResult ShowBookings()
         {
@@ -107,5 +119,27 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
 
             return View(detailsBooking);
         }
+
+        /*
+
+        // hier nog een view van maken
+        public ActionResult PriceDetail(Booking newBooking)
+        {
+            Booking getBooking = bookingRepository.CalculatePrice(newBooking);
+            return View(getBooking);
+        }
+
+        [HttpPost]
+        public ActionResult PriceDetail(Booking booking)
+        {
+            if (booking != null)
+            {
+                bookingRepository.AddBooking(booking);
+                return RedirectToAction("Index", "Hotel");
+            }
+
+            return View(new Booking());
+        }
+         * */
     }
 }
