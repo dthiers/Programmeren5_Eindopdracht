@@ -21,5 +21,7 @@ namespace DomainModel
         public string Email { get; set; }
         public DateTime CheckInDatum { get; set; }
         public DateTime CheckOutDatum { get; set; }
+        public int Kamer { get; set; }
+        public int Prijs { get; set; }
     }
 }

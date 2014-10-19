@@ -7,7 +7,10 @@
 <h2>ShowBookings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateBooking")
+</p>
+<p>
+    @Html.ActionLink("Back to list", "ShowBookings")
 </p>
 <table>
     <tr>
@@ -43,6 +46,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CheckOutDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kamer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijs)
         </th>
         <th></th>
     </tr>
@@ -83,9 +92,15 @@
             @Html.DisplayFor(modelItem => item.CheckOutDatum)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.Kamer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prijs)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditBooking", new { id=item.Sleutel }) |
+            @Html.ActionLink("Details", "DetailsBooking", new { id=item.Sleutel }) |
+            @Html.ActionLink("Delete", "DeleteBooking", new { id=item.Sleutel })
         </td>
     </tr>
 }

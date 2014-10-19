@@ -13,7 +13,15 @@
     <fieldset>
         <legend>Booking</legend>
 
-        @Html.HiddenFor(model => model.Voornaam)
+        @Html.HiddenFor(model => model.Sleutel)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Voornaam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Voornaam)
+            @Html.ValidationMessageFor(model => model.Voornaam)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Tussenvoegsel)
@@ -35,7 +43,7 @@
             @Html.LabelFor(model => model.GeboorteDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.GeboorteDatum)
+            @Html.TextBoxFor(model => model.GeboorteDatum, new { @type = "date" })
             @Html.ValidationMessageFor(model => model.GeboorteDatum)
         </div>
 
@@ -83,7 +91,7 @@
             @Html.LabelFor(model => model.CheckInDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CheckInDatum)
+            @Html.TextBoxFor(model => model.CheckInDatum, new { @type = "date" })
             @Html.ValidationMessageFor(model => model.CheckInDatum)
         </div>
 
@@ -91,8 +99,24 @@
             @Html.LabelFor(model => model.CheckOutDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CheckOutDatum)
+            @Html.TextBoxFor(model => model.CheckOutDatum, new { @type = "date" })
             @Html.ValidationMessageFor(model => model.CheckOutDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Kamer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Kamer)
+            @Html.ValidationMessageFor(model => model.Kamer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Prijs)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Prijs)
+            @Html.ValidationMessageFor(model => model.Prijs)
         </div>
 
         <p>
@@ -102,7 +126,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Hotel")
 </div>
 
 @section Scripts {

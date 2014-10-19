@@ -13,7 +13,13 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         //
         // GET: /Booking/
 
-        private BookingRepository bookingList = new BookingRepository();
+        private BookingRepository bookingRepository;
+        private BookingContext bookingContext;
+
+        public BookingController() {
+            bookingRepository = new BookingRepository();
+            bookingContext = new BookingContext();
+        }
 
         public ActionResult CreateBooking()
         {
@@ -25,7 +31,7 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         {
             if (booking != null)
             {
-                bookingList.AddBooking(booking);
+                bookingRepository.AddBooking(booking);
                 return RedirectToAction("Index", "Hotel");
             }
 
@@ -34,7 +40,7 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
 
         public ActionResult ShowBookings()
         {
-            IEnumerable<Booking> bookings = bookingList.GetAll();
+            IEnumerable<Booking> bookings = bookingRepository.GetAll();
             return View(bookings);
         }
 
@@ -44,7 +50,7 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
             List<Booking> booking = new List<Booking>();
             IEnumerable<Booking> bookings = null;
 
-            foreach (Booking b in bookingList.GetAll())
+            foreach (Booking b in bookingRepository.GetAll())
             {
                 if (b.CheckInDatum.Month == date.Month)
                 {
@@ -57,33 +63,49 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
             return View(bookings);
         }
 
-        // ga naar de pagina waar je de gekozen boeking kunt wijzigen.
-        public ActionResult EditBooking(int sleutel)
-        {
-            Booking editBooking = bookingList.GetBooking(sleutel);
+
+
+
+        /*
+         * Edit booking
+         * */
+        public ActionResult EditBooking(int id) {
+            Booking editBooking = bookingRepository.GetBookingByID(id);
 
             return View(editBooking);
         }
 
         [HttpPost]
-        public ActionResult EditBooking(Booking booking)
-        {
-            bookingList.EditBooking(booking);
+        public ActionResult EditBooking(Booking editBooking) {
+            if (editBooking != null) {
+                bookingRepository.EditBooking(editBooking);
+            }
             return RedirectToAction("ShowBookings");
         }
 
-        public ActionResult DeleteBooking(int sleutel)
-        {
-            Booking booking = bookingList.GetBooking(sleutel);
+        /*
+         * Delete booking
+         * */
+        public ActionResult DeleteBooking(int id) {
+            Booking deleteBooking = bookingRepository.GetBookingByID(id);
 
-            return View(booking);
+            return View(deleteBooking);
         }
 
         [HttpPost]
-        public ActionResult DeleteBooking(Booking booking)
-        {
-            bookingList.DeleteBooking(booking);
+        public ActionResult DeleteBooking(Booking deleteBooking) {
+            bookingRepository.DeleteBooking(deleteBooking);
+
             return RedirectToAction("ShowBookings");
+        }
+
+        /*
+         * Details booking
+         * */
+        public ActionResult DetailsBooking(int id) {
+            Booking detailsBooking = bookingRepository.GetBookingByID(id);
+
+            return View(detailsBooking);
         }
     }
 }

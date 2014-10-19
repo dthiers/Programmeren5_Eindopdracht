@@ -26,43 +26,32 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Models
             bookingContext.SaveChanges();
         }
 
-        // geef de gekozen boeking terug. Boekingen zijn uniek door een sleutel dus geef de boeking als de sleutel matched.
-        public Booking GetBooking(int sleutel)
-        {
-            Booking retBooking = null;
 
-            foreach (Booking b in bookingContext.Bookings)
-            {
-                if (b.Sleutel == sleutel)
-                {
-                    retBooking = b;
+        public Booking GetBookingByID(int p_id) {
+            var b_list = GetAll();
+
+            foreach (var booking in b_list) {
+                if (booking.Sleutel == p_id) {
+                    return booking;
                 }
             }
-            return retBooking;
+            return null;
         }
 
-        // wijzig de gegevens van de gekozen boeking.
-        public void EditBooking(Booking booking)
-        {
-            foreach (Booking b in bookingContext.Bookings)
-            {
-                if (b.Sleutel == booking.Sleutel)
-                {
-                    bookingContext.Entry(b).CurrentValues.SetValues(booking);
-                }
+        public void EditBooking(Booking booking) {
+            Booking bookingToEdit = bookingContext.Bookings.Where(b => b.Sleutel == booking.Sleutel).FirstOrDefault();
+
+            if (bookingToEdit != null) {
+                bookingContext.Entry(bookingToEdit).CurrentValues.SetValues(booking);
             }
             bookingContext.SaveChanges();
         }
 
-        // verwijder de gekozen boeking.
-        public void DeleteBooking(Booking booking)
-        {
-            foreach (Booking b in bookingContext.Bookings)
-            {
-                if (b.Sleutel == booking.Sleutel)
-                {
-                    bookingContext.Bookings.Remove(b);
-                }
+        public void DeleteBooking(Booking booking) {
+            Booking bookingToDelete = bookingContext.Bookings.Where(b => b.Sleutel == booking.Sleutel).FirstOrDefault();
+
+            if (bookingToDelete != null) {
+                bookingContext.Bookings.Remove(bookingToDelete);
             }
             bookingContext.SaveChanges();
         }
