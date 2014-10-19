@@ -25,7 +25,7 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         {
             return View(new Booking());
         }
-
+        [HttpPost]
         public ActionResult CreateBooking(Booking booking)
         {
             if (booking != null)

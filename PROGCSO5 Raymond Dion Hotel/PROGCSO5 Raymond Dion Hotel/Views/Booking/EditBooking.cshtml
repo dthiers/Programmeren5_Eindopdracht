@@ -6,6 +6,7 @@
 
 <h2>EditBooking</h2>
 
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -43,7 +44,7 @@
             @Html.LabelFor(model => model.GeboorteDatum)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.GeboorteDatum, new { @type = "date" })
+            @Html.TextBoxFor(model => model.GeboorteDatum, "{0:dd/MM/yyyy}")
             @Html.ValidationMessageFor(model => model.GeboorteDatum)
         </div>
 
@@ -91,7 +92,7 @@
             @Html.LabelFor(model => model.CheckInDatum)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.CheckInDatum, new { @type = "date" })
+            @Html.TextBoxFor(model => model.CheckInDatum, "{0:dd/MM/yyyy}")
             @Html.ValidationMessageFor(model => model.CheckInDatum)
         </div>
 
@@ -99,7 +100,7 @@
             @Html.LabelFor(model => model.CheckOutDatum)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.CheckOutDatum, new { @type = "date" })
+            @Html.TextBoxFor(model => model.CheckOutDatum,  "{0:dd/MM/yyyy}")
             @Html.ValidationMessageFor(model => model.CheckOutDatum)
         </div>
 
