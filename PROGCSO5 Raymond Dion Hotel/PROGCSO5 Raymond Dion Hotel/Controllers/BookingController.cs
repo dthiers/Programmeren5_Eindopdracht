@@ -25,6 +25,7 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         {
             return View(new Booking());
         }
+
         [HttpPost]
         public ActionResult CreateBooking(Booking booking)
         {
@@ -57,26 +58,38 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         }
 
         // als de maanden van de checkindatum en gekozen datum hetzelfe zijn, toon alle boekingen in die maand.
-        public ActionResult ShowBookingPeriod(DateTime date)
+        public ActionResult ShowBookingPeriod(IEnumerable<Booking> bookings)
         {
-            List<Booking> booking = new List<Booking>();
-            IEnumerable<Booking> bookings = null;
-
-            foreach (Booking b in bookingRepository.GetAll())
-            {
-                if (b.CheckInDatum.Month == date.Month)
-                {
-                    booking.Add(b);
-                }
-            }
-
-            bookings = booking;
-
             return View(bookings);
         }
 
+        public ActionResult CreateBookingPeriod()
+        {
+            return View(new Booking());
+        }
 
+        [HttpPost]
+        public ActionResult CreateBookingPeriod(Booking booking)
+        {
+            if (booking != null)
+            {
+                List<Booking> bookingList = new List<Booking>();
+                IEnumerable<Booking> bookings = null;
 
+                foreach (Booking b in bookingRepository.GetAll())
+                {
+                    if (b.CheckInDatum >= booking.CheckInDatum && b.CheckOutDatum <= booking.CheckOutDatum)
+                    {
+                        bookingList.Add(b);
+                    }
+                }
+
+                bookings = bookingList;
+
+                return RedirectToAction("ShowBookingPeriod", new { bookingEnum = bookings });
+            }
+            return View();
+        }
 
         /*
          * Edit booking

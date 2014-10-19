@@ -1,0 +1,44 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "CreateBookingPeriod";
+}
+
+<h2>CreateBookingPeriod</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Booking</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckInDatum)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.CheckInDatum, new { @type = "date" })
+            @Html.ValidationMessageFor(model => model.CheckInDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckOutDatum)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.CheckOutDatum, new { @type = "date" })
+            @Html.ValidationMessageFor(model => model.CheckOutDatum)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
