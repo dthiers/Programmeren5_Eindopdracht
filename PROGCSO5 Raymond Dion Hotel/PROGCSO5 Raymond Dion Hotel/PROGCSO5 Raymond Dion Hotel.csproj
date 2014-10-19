@@ -232,8 +232,8 @@
     <Content Include="Views\Booking\DetailsBooking.cshtml" />
     <Content Include="Views\Booking\ShowBookings.cshtml" />
     <Content Include="Views\Booking\CreateBooking.cshtml" />
-    <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\PriceDetail.cshtml" />
+    <Content Include="Views\Booking\DeleteBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
