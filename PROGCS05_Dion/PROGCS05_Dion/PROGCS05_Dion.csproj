@@ -143,6 +143,8 @@
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
     <Compile Include="Models\IBookingRepository.cs" />
+    <Compile Include="Models\IRoomRepository.cs" />
+    <Compile Include="Models\RoomRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

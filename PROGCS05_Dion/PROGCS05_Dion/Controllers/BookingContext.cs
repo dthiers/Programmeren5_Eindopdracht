@@ -8,7 +8,6 @@ using System.Web;
 namespace PROGCS05_Dion.Controllers {
     public class BookingContext : DbContext{
         public DbSet<Room> Rooms { get; set; }
-
         public DbSet<Booking> Bookingen { get; set; }
     }
 }
