@@ -143,8 +143,10 @@
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
     <Compile Include="Models\IBookingRepository.cs" />
+    <Compile Include="Models\InformationViewModel.cs" />
     <Compile Include="Models\IRoomRepository.cs" />
     <Compile Include="Models\RoomRepository.cs" />
+    <Compile Include="Models\StartBookingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +234,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Hotel\Index.cshtml" />
-    <Content Include="Views\Booking\CreateBooking.cshtml" />
     <Content Include="Views\Booking\ShowAllBookings.cshtml" />
     <Content Include="Views\Booking\EditBooking.cshtml" />
     <Content Include="Views\Booking\DetailsBooking.cshtml" />

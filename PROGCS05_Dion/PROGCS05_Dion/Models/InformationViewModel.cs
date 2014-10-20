@@ -1,39 +1,22 @@
-﻿using System;
+﻿using PROGCS05_Dion.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace DomainModel
+namespace PROGCS05_Dion
 {
-    public class Booking
+    public class InformationViewModel
     {
-
-
-        [Key]
-        public int Id { get; set; }
-
-
-        [DataType(DataType.Date)]
-        public DateTime StartDatum { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime EindDatum { get; set; }
-
-
-        
-        public int RoomId { get; set; }
-
-        [ForeignKey("RoomId")]
-        public virtual Room kamer { get; set; }
-
         [Required]
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         [Required]
         public string Achternaam { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime GeboorteDatum { get; set; }
         [Required]
         [Display(Name = "Man of Vrouw")]
@@ -47,6 +30,12 @@ namespace DomainModel
         [Required]
         [Display(Name = "Emailadres")]
         public string Email { get; set; }
-        public int Prijs { get; set; }
+
+        public StartBookingViewModel BookingInformation { get; set; }
+
+        public InformationViewModel()
+        {
+            BookingInformation = new StartBookingViewModel();
+        }
     }
 }
