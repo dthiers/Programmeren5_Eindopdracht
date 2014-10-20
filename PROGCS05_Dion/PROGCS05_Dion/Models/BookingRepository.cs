@@ -8,10 +8,10 @@ using System.Web;
 namespace PROGCS05_Dion.Models {
     public class BookingRepository : IBookingRepository{
 
-        private BookingContext bookingContext;
+        private DatabaseContext dbContext;
 
         public BookingRepository() {
-            bookingContext = new BookingContext();
+            dbContext = new DatabaseContext();
         }
         /*
          * Return booking
@@ -24,7 +24,7 @@ namespace PROGCS05_Dion.Models {
          * Return list of all bookings (in DbSet)
          * */
         public List<Booking> GetAll() {
-            return bookingContext.Bookingen.ToList();
+            return dbContext.Bookingen.ToList();
         }
 
         /*
@@ -45,15 +45,13 @@ namespace PROGCS05_Dion.Models {
          * Create booking and save to DbSet
          * */
         public Booking Create(Booking booking) {
-            if (booking != null) {
-                bookingContext.Bookingen.Add(booking);
-            }
-            bookingContext.SaveChanges();
+            if (booking != null) { dbContext.Bookingen.Add(booking); }
+            dbContext.SaveChanges();
             return booking;
         }
 
         /*
-         * Update booking
+         * Update booking in dbSet
          * */
         public Booking Update(Booking booking) {
             var b_list = GetAll();
@@ -61,11 +59,11 @@ namespace PROGCS05_Dion.Models {
             foreach (var b in b_list) {
                 if (b != null) {
                     if (b.Id == booking.Id) {
-                        bookingContext.Entry(b).CurrentValues.SetValues(booking);
+                        dbContext.Entry(b).CurrentValues.SetValues(booking);
                     }
                 }
             }
-            bookingContext.SaveChanges();
+            dbContext.SaveChanges();
 
             return new Booking();
         }
@@ -79,11 +77,11 @@ namespace PROGCS05_Dion.Models {
             foreach (var b in b_list) {
                 if (b != null) {
                     if (b.Id == booking.Id) {
-                        bookingContext.Bookingen.Remove(b);
+                        dbContext.Bookingen.Remove(b);
                     }
                 }
             }
-            bookingContext.SaveChanges();
+            dbContext.SaveChanges();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 
 namespace PROGCS05_Dion.Controllers {
-    public class BookingContext : DbContext{
+    public class DatabaseContext : DbContext{
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookingen { get; set; }
     }

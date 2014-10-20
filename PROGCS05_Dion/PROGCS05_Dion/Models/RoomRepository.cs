@@ -2,27 +2,72 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DomainModel;
+using PROGCS05_Dion.Controllers;
 
 namespace PROGCS05_Dion.Models {
     public class RoomRepository : IRoomRepository {
-        public DomainModel.Room Get() {
-            throw new NotImplementedException();
+
+        private DatabaseContext dbContext;
+
+        public RoomRepository() {
+            dbContext = new DatabaseContext();
         }
 
-        public List<DomainModel.Room> GetAll() {
-            throw new NotImplementedException();
+        /*
+         * This method does nothing so far but return a new empty room
+         * */
+        public Room Get() {
+            return new Room();
         }
 
-        public DomainModel.Room Create(DomainModel.Room room) {
-            throw new NotImplementedException();
+        /*
+         * Return list of all rooms (in DbSet)
+         * */
+        public List<Room> GetAll() {
+            return dbContext.Rooms.ToList();
         }
 
-        public DomainModel.Room Update(DomainModel.Room room) {
-            throw new NotImplementedException();
+        /*
+         * Get room by ID
+         * */
+        public Room GetRoomByID(int id) {
+            return dbContext.Rooms.Where(r => r.Id == id).FirstOrDefault();
         }
 
-        public void Delete(DomainModel.Room room) {
-            throw new NotImplementedException();
+        /*
+         * Create room and save to DbSet
+         * */
+        public Room Create(Room room) {
+            if (room != null) { dbContext.Rooms.Add(room); }
+            dbContext.SaveChanges();
+            return room;
+        }
+
+        /*
+         * Update room in DbSet
+         * */
+        public Room Update(Room room) {
+            Room r_update = dbContext.Rooms.Where(r => r.Id == room.Id).FirstOrDefault();
+
+            if (r_update != null) {
+                dbContext.Entry(r_update).CurrentValues.SetValues(room);
+            }
+            dbContext.SaveChanges();
+            return room;
+        }
+        
+        /*
+         * Delete room from DbSet
+         * */
+        public void Delete(Room room) {
+            // Toch weer even die lambda proberen, ziet er netter uit imo
+            Room r_delete = dbContext.Rooms.Where(r => r.Id == room.Id).FirstOrDefault();
+
+            if (r_delete != null) {
+                dbContext.Rooms.Remove(r_delete);
+            }
+            dbContext.SaveChanges();
         }
     }
 }
