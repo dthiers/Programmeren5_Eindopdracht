@@ -87,9 +87,9 @@ namespace PROGCS05_Dion.Controllers
             List<Booking> bookingListForPeriod = new List<Booking>();
 
             foreach (Booking b in bookingRepository.GetAll()) {
-                if (b.CheckInDatum >= startDate && b.CheckInDatum <= endDate) {
-                    bookingListForPeriod.Add(b);
-                }
+                //if (b.CheckInDatum >= startDate && b.CheckInDatum <= endDate) {
+                //    bookingListForPeriod.Add(b);
+                //}
             }
             IEnumerable<Booking> bookings = bookingListForPeriod;
             TempData["PeriodBookings"] = bookings;

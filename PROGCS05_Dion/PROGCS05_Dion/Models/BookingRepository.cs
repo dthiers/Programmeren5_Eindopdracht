@@ -24,7 +24,7 @@ namespace PROGCS05_Dion.Models {
          * Return list of all bookings (in DbSet)
          * */
         public List<Booking> GetAll() {
-            return bookingContext.Bookings.ToList();
+            return bookingContext.Bookingen.ToList();
         }
 
         /*
@@ -46,7 +46,7 @@ namespace PROGCS05_Dion.Models {
          * */
         public Booking Create(Booking booking) {
             if (booking != null) {
-                bookingContext.Bookings.Add(booking);
+                bookingContext.Bookingen.Add(booking);
             }
             bookingContext.SaveChanges();
             return booking;
@@ -79,7 +79,7 @@ namespace PROGCS05_Dion.Models {
             foreach (var b in b_list) {
                 if (b != null) {
                     if (b.Id == booking.Id) {
-                        bookingContext.Bookings.Remove(b);
+                        bookingContext.Bookingen.Remove(b);
                     }
                 }
             }
