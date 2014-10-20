@@ -21,9 +21,9 @@ namespace DomainModel
 
 
         
-        public int KamerId { get; set; }
+        public int RoomId { get; set; }
 
-        [ForeignKey("KamerId")]
+        [ForeignKey("RoomId")]
         public virtual Room kamer { get; set; }
 
         [Required]
