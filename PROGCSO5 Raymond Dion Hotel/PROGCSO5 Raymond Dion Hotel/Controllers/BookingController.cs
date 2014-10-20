@@ -118,8 +118,9 @@ namespace PROGCSO5_Raymond_Dion_Hotel.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteBooking() {
-
+        [ActionName("DeleteBooking")]
+        public ActionResult DeleteBookingPost(int id) {
+            bookingRepository.DeleteBooking(bookingRepository.GetBookingByID(id));
             return RedirectToAction("ShowBookings");
         }
 
