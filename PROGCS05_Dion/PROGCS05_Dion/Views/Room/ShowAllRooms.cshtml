@@ -7,10 +7,13 @@
 <h2>ShowAllRooms</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateRoom")
 </p>
 <table>
     <tr>
+        <th>
+            Room #
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Capaciteit)
         </th>
@@ -20,12 +23,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Capaciteit)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "EditRoom", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsRoom", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteRoom", new { id=item.Id })
         </td>
     </tr>
 }

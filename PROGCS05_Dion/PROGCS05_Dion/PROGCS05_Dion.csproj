@@ -241,6 +241,10 @@
     <Content Include="Views\Booking\SelectBookingPeriod.cshtml" />
     <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
     <Content Include="Views\Room\ShowAllRooms.cshtml" />
+    <Content Include="Views\Room\DetailsRoom.cshtml" />
+    <Content Include="Views\Room\EditRoom.cshtml" />
+    <Content Include="Views\Room\DeleteRoom.cshtml" />
+    <Content Include="Views\Room\CreateRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
