@@ -240,6 +240,10 @@
     <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\SelectBookingPeriod.cshtml" />
     <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
+    <Content Include="Views\Booking\CreateBooking.cshtml" />
+    <Content Include="Views\Booking\ChooseRoom.cshtml" />
+    <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
+    <Content Include="Views\Booking\BookRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
