@@ -73,8 +73,6 @@ namespace PROGCS05_Dion.Controllers
 
         /*
          * Show booking within period
-         * Weltrusten
-         * Laatste edit... kijken of Git weer werkt
          * */
         public ActionResult SelectBookingPeriod() {
             return View();
