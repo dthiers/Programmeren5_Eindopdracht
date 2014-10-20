@@ -64,7 +64,9 @@ namespace PROGCS05_Dion.Controllers
             return View(b_delete);
         }
         [HttpPost]
-        public ActionResult DeleteBooking(Booking booking) {
+        [ActionName("DeleteBooking")]
+        public ActionResult DeleteBookingPost(int id) {
+            var booking = bookingRepository.GetBookingByID(id);
             if (booking != null) {
                 bookingRepository.Delete(booking);
             }
