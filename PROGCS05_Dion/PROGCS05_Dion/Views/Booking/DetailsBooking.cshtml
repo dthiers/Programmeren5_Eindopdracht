@@ -1,0 +1,106 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "DetailsBooking";
+}
+
+<h2>DetailsBooking</h2>
+
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Voornaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Voornaam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tussenvoegsel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tussenvoegsel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Achternaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Achternaam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GeboorteDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GeboorteDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ManOfVrouw)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManOfVrouw)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Adres)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adres)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Postcode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Postcode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Woonplaats)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Woonplaats)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckInDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckInDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckOutDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckOutDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Kamer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Kamer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Prijs)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Prijs)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
+    @Html.ActionLink("Return to index", "Index", "Hotel")
+</p>

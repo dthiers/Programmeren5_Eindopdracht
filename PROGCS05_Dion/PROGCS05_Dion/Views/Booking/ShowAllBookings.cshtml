@@ -1,0 +1,108 @@
+﻿@model IEnumerable<DomainModel.Booking>
+
+@{
+    ViewBag.Title = "ShowAllBookings";
+}
+
+<h2>ShowAllBookings</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBooking")
+</p>
+<p>
+    @Html.ActionLink("Return to index", "Index", "Hotel")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Voornaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tussenvoegsel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Achternaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeboorteDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManOfVrouw)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Postcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Woonplaats)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckInDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOutDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kamer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijs)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Voornaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tussenvoegsel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Achternaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeboorteDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManOfVrouw)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Postcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Woonplaats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckInDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckOutDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kamer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prijs)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditBooking", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsBooking", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteBooking", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,47 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "SelectBookingPeriod";
+}
+
+<h2>SelectBookingPeriod</h2>
+<p>
+    Select a period to show which bookings where made in it (begin- and end-date of the period)
+</p>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Booking</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckInDatum)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.CheckInDatum, new { @type = "date" })
+            @Html.ValidationMessageFor(model => model.CheckInDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckOutDatum)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.CheckOutDatum, new { @type = "date" })
+            @Html.ValidationMessageFor(model => model.CheckOutDatum)
+        </div>
+
+        <p>
+            <input type="submit" value="Show" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Return to index", "Index", "Hotel")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
