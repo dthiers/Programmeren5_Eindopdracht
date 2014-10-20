@@ -246,6 +246,10 @@
     <Content Include="Views\Room\EditRoom.cshtml" />
     <Content Include="Views\Room\DeleteRoom.cshtml" />
     <Content Include="Views\Room\CreateRoom.cshtml" />
+    <Content Include="Views\Booking\CreateBooking.cshtml" />
+    <Content Include="Views\Booking\ChooseRoom.cshtml" />
+    <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
+    <Content Include="Views\Booking\BookRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

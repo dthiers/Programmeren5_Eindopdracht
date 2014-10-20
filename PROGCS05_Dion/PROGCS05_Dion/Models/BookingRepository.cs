@@ -2,6 +2,7 @@
 using PROGCS05_Dion.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -82,6 +83,11 @@ namespace PROGCS05_Dion.Models {
                 }
             }
             dbContext.SaveChanges();
+        }
+
+        public DbSet<Room> GetRooms()
+        {
+            return bookingContext.Rooms;
         }
     }
 }

@@ -16,9 +16,11 @@ namespace DomainModel
 
 
         [DataType(DataType.Date)]
+        [Display(Name="Start-datum")]
         public DateTime StartDatum { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Eind-datum")]
         public DateTime EindDatum { get; set; }
 
 
@@ -34,6 +36,7 @@ namespace DomainModel
         [Required]
         public string Achternaam { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime GeboorteDatum { get; set; }
         [Required]
         [Display(Name = "Man of Vrouw")]

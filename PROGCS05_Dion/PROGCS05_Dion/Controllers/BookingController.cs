@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace PROGCS05_Dion.Controllers
 {
@@ -42,19 +43,19 @@ namespace PROGCS05_Dion.Controllers
             //We willen een lisjt van kamers die voldoet aan de eisen van de gebruiker.
 
             //database wordt repository bovenaan.
-            var model = dbContext.Rooms
+            var model = bookingRepository.GetRooms()
                 .Include(m => m.BookingList)
                 .Where(k => k.Capaciteit == booking.Capaciteit);
 
             //Ik geef de begin en eind datum mee aan de view omdat ik deze later in het 'proces' nog wil gebruikern
-            ViewBag.BeginDatum = booking.BeginDatum;
-            ViewBag.EindDatum = booking.EindDatum;
-            ViewBag.Capaciteit = booking.Capaciteit;
+            ViewBag.StartDate = booking.BeginDatum;
+            ViewBag.EndDate = booking.EindDatum;
+            ViewBag.Capacity = booking.Capaciteit;
 
             return View(model);
         }
 
-        public ActionResult InsertGuestInfo(int kamerId, DateTime beginDatum, DateTime eindDatum, int capaciteit)
+        public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
             InformationViewModel model = new InformationViewModel();
 
@@ -64,15 +65,15 @@ namespace PROGCS05_Dion.Controllers
             model.BookingInformation.EindDatum = eindDatum;
 
              * */
-            ViewBag.KamerId = kamerId;
-            ViewBag.BeginDatum = beginDatum;
-            ViewBag.EindDatum = eindDatum;
-            ViewBag.Capaciteit = capaciteit;
+            ViewBag.RoomId = roomId;
+            ViewBag.StartDate = startDate;
+            ViewBag.EndDate = endDate;
+            ViewBag.Capacity = capacity;
 
             return View(model);
         }
 
-        public ActionResult BookRoom(InformationViewModel informatie, int kamerId, DateTime beginDatum, DateTime eindDatum, int capaciteit)
+        public ActionResult BookRoom(InformationViewModel information, int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
             //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
             DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
@@ -82,27 +83,27 @@ namespace PROGCS05_Dion.Controllers
             //Ik maak mijn object en sla hem op in de database
             var booking = new Booking();
 
-            booking.EindDatum = eindDatum;
-            booking.StartDatum = beginDatum;
-            booking.RoomId = kamerId;
-            booking.Voornaam = informatie.Voornaam;
-            booking.Tussenvoegsel = informatie.Tussenvoegsel;
-            booking.Achternaam = informatie.Achternaam;
-            booking.GeboorteDatum = informatie.GeboorteDatum;
-            booking.ManOfVrouw = informatie.ManOfVrouw;
-            booking.Adres = informatie.Adres;
-            booking.Postcode = informatie.Postcode;
-            booking.Woonplaats = informatie.Woonplaats;
-            booking.Email = informatie.Email;
+            booking.StartDatum = startDate;
+            booking.EindDatum = endDate;
+            booking.RoomId = roomId;
+            booking.Voornaam = information.Voornaam;
+            booking.Tussenvoegsel = information.Tussenvoegsel;
+            booking.Achternaam = information.Achternaam;
+            booking.GeboorteDatum = information.GeboorteDatum;
+            booking.ManOfVrouw = information.ManOfVrouw;
+            booking.Adres = information.Adres;
+            booking.Postcode = information.Postcode;
+            booking.Woonplaats = information.Woonplaats;
+            booking.Email = information.Email;
 
             // bereken prijs
             int prijs = 0;
 
-            if (capaciteit == 2)
+            if (capacity == 2)
             {
                 prijs = 20;
             }
-            else if (capaciteit == 3)
+            else if (capacity == 3)
             {
                 prijs = 30;
             }
@@ -125,8 +126,7 @@ namespace PROGCS05_Dion.Controllers
 
             booking.Prijs = prijs;
 
-            dbContext.Bookingen.Add(booking);
-            dbContext.SaveChanges();
+            bookingRepository.Create(booking);
 
             //Op het einde toon ik de opgeslage booking aan de gebruiker
             return View(booking);
