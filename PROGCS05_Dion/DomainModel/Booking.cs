@@ -7,9 +7,25 @@ using System.Text;
 namespace DomainModel
 {
     public class Booking{
-        
+
+
         [Key]
         public int Id { get; set; }
+
+
+        [DataType(DataType.Date)]
+        public DateTime StartDatum { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime EindDatum { get; set; }
+
+
+        
+        public int KamerId { get; set; }
+
+        [ForeignKey("KamerId")]
+        public virtual Room kamer { get; set; }
+
         [Required]
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
@@ -29,15 +45,6 @@ namespace DomainModel
         [Required]
         [Display(Name = "Emailadres")]
         public string Email { get; set; }
-        [Required]
-        [Display(Name = "Check-in datum")]
-        public DateTime CheckInDatum { get; set; }
-        [Required]
-        [Display(Name = "Check-out datum")]
-        public DateTime CheckOutDatum { get; set; }
-        [Required]
-        [Display(Name = "Kamer  2, 3 of 5")]
-        public int Kamer { get; set; }
-        public int Prijs { get; set; }
+
     }
 }
