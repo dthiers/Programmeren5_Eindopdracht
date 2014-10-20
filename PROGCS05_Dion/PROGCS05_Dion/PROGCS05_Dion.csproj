@@ -135,7 +135,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BookingContext.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Global.asax.cs">
@@ -239,6 +240,7 @@
     <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\SelectBookingPeriod.cshtml" />
     <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
+    <Content Include="Views\Room\ShowAllRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

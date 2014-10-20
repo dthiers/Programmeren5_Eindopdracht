@@ -14,6 +14,8 @@ namespace PROGCS05_Dion.Controllers
             roomRepository = new RoomRepository();
         }
 
-
+        public ActionResult ShowAllRooms() {
+            return View(roomRepository.GetAll());
+        }
     }
 }
