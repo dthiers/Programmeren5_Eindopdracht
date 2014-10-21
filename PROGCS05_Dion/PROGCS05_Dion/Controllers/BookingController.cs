@@ -40,19 +40,11 @@ namespace PROGCS05_Dion.Controllers
         public ActionResult ChooseRoom(StartBookingViewModel booking)
         {
             //Check of de capaciteit geldig is.
-            Boolean check = true;
+            Boolean check = false;
 
-            if (booking.Capaciteit != 2 || booking.Capaciteit != 3 || booking.Capaciteit != 5)
+            if (booking.Capaciteit == 2 || booking.Capaciteit == 3 || booking.Capaciteit == 5)
             {
-                check = false;
-            }
-            else if(booking.Capaciteit != 3)
-            {
-                check = false;
-            }
-            else if (booking.Capaciteit != 5)
-            {
-                check = false;
+                check = true;
             }
             
             if (check)
