@@ -99,8 +99,15 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Prijs)
     </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Capaciteit)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Capaciteit)
+    </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "EditRoom", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", "Hotel")
+    @Html.ActionLink("Ok", "Invoice", "Booking")
+    @Html.ActionLink("Cancel", "Index", "Hotel") |
 </p>

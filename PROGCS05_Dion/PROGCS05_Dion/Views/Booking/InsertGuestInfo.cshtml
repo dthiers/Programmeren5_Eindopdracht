@@ -86,6 +86,13 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Bankrekeningnummer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Bankrekeningnummer)
+            @Html.ValidationMessageFor(model => model.Bankrekeningnummer)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -93,7 +100,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", "Hotel")
+    @Html.ActionLink("Cancel", "Index", "Hotel")
 </div>
 
 @section Scripts {

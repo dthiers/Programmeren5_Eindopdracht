@@ -30,7 +30,7 @@ namespace PROGCS05_Dion
         [Required]
         [Display(Name = "Emailadres")]
         public string Email { get; set; }
-
+        public string Bankrekeningnummer { get; set; }
         public StartBookingViewModel BookingInformation { get; set; }
 
         public InformationViewModel()

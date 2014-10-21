@@ -93,6 +93,8 @@ namespace PROGCS05_Dion.Controllers
             booking.Postcode = information.Postcode;
             booking.Woonplaats = information.Woonplaats;
             booking.Email = information.Email;
+            booking.BankrekeningNummer = information.Bankrekeningnummer;
+            booking.Capaciteit = capacity;
 
             // bereken prijs
             // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
@@ -100,12 +102,31 @@ namespace PROGCS05_Dion.Controllers
 
             booking.Prijs = prijs;
 
-            bookingRepository.Create(booking);
-
+            TempData["booking"] = booking;
             //Op het einde toon ik de opgeslage booking aan de gebruiker
             return View(booking);
         }
 
+        public ActionResult Invoice()
+        {
+            // genereer een random factuurnummer
+            Booking booking = (Booking)TempData["booking"];
+
+            Random random = new Random();
+            string nummer = "";
+
+            for(int i = 0; i < 6; i++)
+            {
+                nummer = nummer + random.Next(9);
+            }
+
+            int factuurNummer = Convert.ToInt32(nummer);
+
+            booking.FactuurNummer = factuurNummer;
+
+            bookingRepository.Create(booking);
+            return View(booking);
+        }
 
         /*
          * Edit booking

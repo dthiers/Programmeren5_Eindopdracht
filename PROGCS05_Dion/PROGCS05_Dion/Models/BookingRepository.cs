@@ -33,7 +33,7 @@ namespace PROGCS05_Dion.Models {
          * */
         public Booking GetBookingByID(int id) {
             return (dbContext.Bookingen.Where(b => b.Id == id).FirstOrDefault());
-        }
+                }
 
         /*
          * Create booking and save to DbSet
@@ -51,7 +51,7 @@ namespace PROGCS05_Dion.Models {
             Booking b_update = dbContext.Bookingen.Where(b => b.Id == booking.Id).FirstOrDefault();
             if (b_update != null) {
                 dbContext.Entry(b_update).CurrentValues.SetValues(booking);
-            }
+                    }
             dbContext.SaveChanges();
 
             return new Booking();
@@ -71,13 +71,13 @@ namespace PROGCS05_Dion.Models {
 
         public DbSet<Room> GetRooms(){
             return dbContext.Rooms;
-        }
+                    }
 
         public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
             //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
             DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
             DateTime hoogTariefEind = new DateTime(2015, 8, 31);
-            
+
             int prijs = 0;
 
             if (capacity == 2) {
@@ -89,7 +89,6 @@ namespace PROGCS05_Dion.Models {
             else {
                 prijs = 40;
             }
-
             for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
                 if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind) {
                     prijs += 90;

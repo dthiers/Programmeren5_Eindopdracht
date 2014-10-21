@@ -1,0 +1,36 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "Invoice";
+}
+
+<h2>Invoice</h2>
+
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Prijs)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Prijs)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FactuurNummer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FactuurNummer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BankrekeningNummer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BankrekeningNummer)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Home", "Index", "Hotel") |
+</p>
