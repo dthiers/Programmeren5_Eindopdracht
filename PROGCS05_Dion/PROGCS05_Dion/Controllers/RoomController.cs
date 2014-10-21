@@ -55,6 +55,13 @@ namespace PROGCS05_Dion.Controllers
         [HttpPost]
         [ActionName("EditRoom")]
         public ActionResult EditRoom(Room room) {
+
+            foreach (Booking b in room.BookingList)
+            {
+                b.Capaciteit = room.Capaciteit;
+                
+            }
+
             if (room != null) { roomRepository.Update(room); }
 
             return RedirectToAction("DetailsRoom", new { id = room.Id});

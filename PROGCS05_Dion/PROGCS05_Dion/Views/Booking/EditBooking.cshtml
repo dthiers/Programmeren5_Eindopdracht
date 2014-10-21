@@ -112,6 +112,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.Capaciteit)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Capaciteit)
+            @Html.ValidationMessageFor(model => model.Capaciteit)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.BankrekeningNummer)
         </div>
         <div class="editor-field">

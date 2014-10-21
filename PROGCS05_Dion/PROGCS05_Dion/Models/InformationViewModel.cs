@@ -33,7 +33,6 @@ namespace PROGCS05_Dion
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Display(Name="Bankrekeningnummer (IBAN)")]
-        [Required(ErrorMessage = "Uw bankrekeningnummer (IBAN) moet 10 karakters bevatten")]
         [MaxLength(10, ErrorMessage = "Bankrekeningnummer moet een lengte van 10 hebben!"), MinLength(10)]
         public string Bankrekeningnummer { get; set; }
         public StartBookingViewModel BookingInformation { get; set; }
