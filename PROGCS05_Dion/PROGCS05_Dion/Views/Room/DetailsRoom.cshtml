@@ -31,7 +31,9 @@
         </tr>
       </table>
 
-        @foreach (var item in Model.BookingList) {
+    @foreach (var item in Model.BookingList)
+    {
+        <table>
             <tr>
                 <td>
                     @Html.DisplayFor(model => item.StartDatum)
@@ -43,8 +45,11 @@
                     @Html.ActionLink("Go to booking", "DetailsBooking", "Booking", new { id = item.Id }, null)
                 </td>
             </tr>
-        }
+        </table>
+    }
 </fieldset>
+
+
 <p>
     @Html.ActionLink("Edit", "EditRoom", new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "ShowAllRooms")

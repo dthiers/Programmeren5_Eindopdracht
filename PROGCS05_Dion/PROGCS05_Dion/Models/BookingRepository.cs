@@ -71,7 +71,7 @@ namespace PROGCS05_Dion.Models {
 
         public DbSet<Room> GetRooms(){
             return dbContext.Rooms;
-                    }
+        }
 
         public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
             //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
@@ -89,12 +89,7 @@ namespace PROGCS05_Dion.Models {
             else {
                 prijs = 40;
             }
-        }
-
-        public DbSet<Room> GetRooms()
-        {
-            return dbContext.Rooms;
-            for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
+                        for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
                 if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind) {
                     prijs += 90;
                 }
