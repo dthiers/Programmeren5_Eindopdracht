@@ -89,6 +89,11 @@ namespace PROGCS05_Dion.Models {
             else {
                 prijs = 40;
             }
+        }
+
+        public DbSet<Room> GetRooms()
+        {
+            return dbContext.Rooms;
             for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
                 if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind) {
                     prijs += 90;

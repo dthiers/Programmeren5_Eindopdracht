@@ -15,6 +15,35 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Capaciteit)
     </div>
+
+    <table>
+        <tr>
+            <th>
+                Begin
+            </th>
+            <th>
+                Eind
+            </th>
+            <th>
+                Link
+            </th>
+            <th></th>
+        </tr>
+      </table>
+
+        @foreach (var item in Model.BookingList) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.StartDatum)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.EindDatum)
+                </td>
+                <td>
+                    @Html.ActionLink("Go to booking", "DetailsBooking", "Booking", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "EditRoom", new { id=Model.Id }) |

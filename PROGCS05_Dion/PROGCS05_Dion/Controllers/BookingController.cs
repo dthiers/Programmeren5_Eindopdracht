@@ -75,36 +75,42 @@ namespace PROGCS05_Dion.Controllers
 
         public ActionResult BookedRoom(InformationViewModel information, int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
+
+            if (ModelState.IsValid) {
             
+                //Ik heb nu alle informatie die ik nodig heb om een booking te maken
+                //Ik maak mijn object en sla hem op in de database
+                var booking = new Booking();
 
-            //Ik heb nu alle informatie die ik nodig heb om een booking te maken
-            //Ik maak mijn object en sla hem op in de database
-            var booking = new Booking();
+                booking.StartDatum = startDate;
+                booking.EindDatum = endDate;
+                booking.RoomId = roomId;
+                booking.Voornaam = information.Voornaam;
+                booking.Tussenvoegsel = information.Tussenvoegsel;
+                booking.Achternaam = information.Achternaam;
+                booking.GeboorteDatum = information.GeboorteDatum;
+                booking.ManOfVrouw = information.ManOfVrouw;
+                booking.Adres = information.Adres;
+                booking.Postcode = information.Postcode;
+                booking.Woonplaats = information.Woonplaats;
+                booking.Email = information.Email;
+                booking.BankrekeningNummer = information.Bankrekeningnummer;
+                booking.Capaciteit = capacity;
 
-            booking.StartDatum = startDate;
-            booking.EindDatum = endDate;
-            booking.RoomId = roomId;
-            booking.Voornaam = information.Voornaam;
-            booking.Tussenvoegsel = information.Tussenvoegsel;
-            booking.Achternaam = information.Achternaam;
-            booking.GeboorteDatum = information.GeboorteDatum;
-            booking.ManOfVrouw = information.ManOfVrouw;
-            booking.Adres = information.Adres;
-            booking.Postcode = information.Postcode;
-            booking.Woonplaats = information.Woonplaats;
-            booking.Email = information.Email;
-            booking.BankrekeningNummer = information.Bankrekeningnummer;
-            booking.Capaciteit = capacity;
+                // bereken prijs
+                // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
+                int prijs = bookingRepository.CalculatePrice(capacity, booking.StartDatum, booking.EindDatum);
 
-            // bereken prijs
-            // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
-            int prijs = bookingRepository.CalculatePrice(capacity, booking.StartDatum, booking.EindDatum);
+                booking.Prijs = prijs;
 
-            booking.Prijs = prijs;
+                TempData["booking"] = booking;
+                //Op het einde toon ik de opgeslage booking aan de gebruiker
 
-            TempData["booking"] = booking;
-            //Op het einde toon ik de opgeslage booking aan de gebruiker
-            return View(booking);
+                return View(booking);
+            }
+            else {
+                return RedirectToAction("InsertGuestInfo");
+            }
         }
 
         public ActionResult Invoice()

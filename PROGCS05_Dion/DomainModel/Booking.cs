@@ -47,8 +47,11 @@ namespace DomainModel
         public string Postcode { get; set; }
         [Required]
         public string Woonplaats { get; set; }
-        [Required]
-        [Display(Name = "Emailadres")]
+
+        [Required(ErrorMessage = "Email is rhjhgjhjkjkhjk")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
         public int Prijs { get; set; }
         public int FactuurNummer { get; set; }
