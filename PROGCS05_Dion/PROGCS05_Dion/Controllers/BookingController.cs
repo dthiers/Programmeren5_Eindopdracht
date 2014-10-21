@@ -27,16 +27,25 @@ namespace PROGCS05_Dion.Controllers
         /*
          * Create booking
          * */
-        public ActionResult CreateBooking()
+        public ActionResult CreateBooking(string errorMessage)
         {
             //We maken een view model waar de gebruiker zijn eerste informatie in kan vullen
             StartBookingViewModel model = new StartBookingViewModel();
+            //Errormessage als er een verkeerde capaciteit is gekozen
+            ViewBag.ErrorMessage = errorMessage;
             //Dit geven we mee aan de view
             return View(model);
         }
 
         public ActionResult ChooseRoom(StartBookingViewModel booking)
         {
+            //Check of de capaciteit geldig is.
+
+            if (booking.Capaciteit != 2 || booking.Capaciteit != 3 || booking.Capaciteit != 5)
+            {
+                return RedirectToAction("CreateBooking", new { errorMessage = "Kies een capaciteit van 2, 3 of 5!" });
+            }
+
             //Als een gebruiker de informatie heeft ingevuld ontvangen we dat model weer in deze action.
 
             //op basis van de gegevens die de gebruiker heeft ingevoerd, gaan we filteren op de lijst van kamers.
@@ -46,7 +55,8 @@ namespace PROGCS05_Dion.Controllers
             var model = bookingRepository.GetRooms()
                 .Include(m => m.BookingList)
                 .Where(k => k.Capaciteit == booking.Capaciteit);
-
+             // .Where(j => j.BookingList.ToList().ForEach(i => i.StartDatum != booking.BeginDatum));
+                
             //Ik geef de begin en eind datum mee aan de view omdat ik deze later in het 'proces' nog wil gebruikern
             ViewBag.StartDate = booking.BeginDatum;
             ViewBag.EndDate = booking.EindDatum;
@@ -55,7 +65,7 @@ namespace PROGCS05_Dion.Controllers
             return View(model);
         }
 
-        public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
+        public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity, string errorMessage)
         {
             InformationViewModel model = new InformationViewModel();
 
@@ -69,6 +79,7 @@ namespace PROGCS05_Dion.Controllers
             ViewBag.StartDate = startDate;
             ViewBag.EndDate = endDate;
             ViewBag.Capacity = capacity;
+            ViewBag.ErrorMessage = errorMessage;
 
             return View(model);
         }
@@ -77,7 +88,7 @@ namespace PROGCS05_Dion.Controllers
         {
 
             if (ModelState.IsValid) {
-            
+
                 //Ik heb nu alle informatie die ik nodig heb om een booking te maken
                 //Ik maak mijn object en sla hem op in de database
                 var booking = new Booking();
@@ -109,7 +120,7 @@ namespace PROGCS05_Dion.Controllers
                 return View(booking);
             }
             else {
-                return RedirectToAction("InsertGuestInfo");
+                return RedirectToAction("InsertGuestInfo", new { roomId = roomId, startDate = startDate, endDate = endDate, capacity = capacity, errorMessage = "Uw IBAN moet 10 karakters bevatten!"});
             }
         }
 
@@ -143,6 +154,10 @@ namespace PROGCS05_Dion.Controllers
         }
         [HttpPost]
         public ActionResult EditBooking(Booking booking) {
+
+            int nieuwPrijs = bookingRepository.CalculatePrice(booking.Capaciteit, booking.StartDatum, booking.EindDatum);
+            booking.Prijs = nieuwPrijs;
+
             var b_edit = bookingRepository.Update(booking);
             return RedirectToAction("ShowAllBookings");
         }

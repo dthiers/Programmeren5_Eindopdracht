@@ -14,7 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Capaciteit)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -23,9 +22,11 @@
             @Html.DisplayFor(modelItem => item.Capaciteit)
         </td>
         <td>
-            @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }) |
+            @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity, errorMessage = "" }) |
         </td>
     </tr>
 }
 
 </table>
+
+@Html.ActionLink("Back", "CreateBooking", "Booking")

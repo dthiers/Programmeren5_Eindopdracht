@@ -19,7 +19,7 @@ namespace PROGCS05_Dion
         [DataType(DataType.Date)]
         public DateTime GeboorteDatum { get; set; }
         [Required]
-        [Display(Name = "Man of Vrouw")]
+        [Display(Name = "Geslacht")]
         public string ManOfVrouw { get; set; }
         [Required]
         public string Adres { get; set; }
@@ -27,9 +27,14 @@ namespace PROGCS05_Dion
         public string Postcode { get; set; }
         [Required]
         public string Woonplaats { get; set; }
-        [Required]
-        [Display(Name = "Emailadres")]
+        [Required(ErrorMessage = "Email is required.")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
+        [Display(Name="Bankrekeningnummer (IBAN)")]
+        [Required(ErrorMessage = "Uw bankrekeningnummer (IBAN) moet 10 karakters bevatten")]
+        [MaxLength(10, ErrorMessage = "Bankrekeningnummer moet een lengte van 10 hebben!"), MinLength(10)]
         public string Bankrekeningnummer { get; set; }
         public StartBookingViewModel BookingInformation { get; set; }
 

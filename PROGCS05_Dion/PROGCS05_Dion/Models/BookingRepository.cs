@@ -73,7 +73,8 @@ namespace PROGCS05_Dion.Models {
             return dbContext.Rooms;
         }
 
-        public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
+        public int CalculatePrice(int capacity, Nullable<System.DateTime> startDatum, Nullable<System.DateTime> eindDatum)
+        {
             //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
             DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
             DateTime hoogTariefEind = new DateTime(2015, 8, 31);
@@ -89,11 +90,42 @@ namespace PROGCS05_Dion.Models {
             else {
                 prijs = 40;
             }
-                        for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
+
+            // ik maak een DateTime die de value pakt van het Nonnullable startDatum.
+            DateTime deStartDatum = startDatum.Value;
+
+            for (DateTime date = deStartDatum; date <= eindDatum; date = date.AddDays(1))
+            {
                 if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind) {
                     prijs += 90;
                 }
                 else {
+                    prijs += 60;
+                }
+            }
+            return prijs;
+        }
+
+        // 2e methode om prijs uit te rekenen omdat je hier niet meer kijkt naar de capaciteit omdat dat eenmalige kosten zijn.
+        public int ReCalculatePrice(int capacity, Nullable<System.DateTime> startDatum, Nullable<System.DateTime> eindDatum)
+        {
+            //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
+            DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
+            DateTime hoogTariefEind = new DateTime(2015, 8, 31);
+
+            // ik maak een DateTime die de value pakt van het Nonnullable startDatum.
+            DateTime deStartDatum = startDatum.Value;
+
+            int prijs = 0;
+
+            for (DateTime date = deStartDatum; date <= eindDatum; date = date.AddDays(1))
+            {
+                if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind)
+                {
+                    prijs += 90;
+                }
+                else
+                {
                     prijs += 60;
                 }
             }

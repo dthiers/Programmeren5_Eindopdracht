@@ -6,6 +6,8 @@
 
 <h2>CreateBooking</h2>
 
+<h3>@ViewBag.ErrorMessage</h3>
+
 @using (Html.BeginForm("ChooseRoom", "Booking")) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -38,7 +40,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Search Room" />
         </p>
     </fieldset>
 }

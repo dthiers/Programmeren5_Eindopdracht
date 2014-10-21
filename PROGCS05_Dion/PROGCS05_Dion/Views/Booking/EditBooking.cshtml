@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.StartDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StartDatum, "{0:dd/MM/yyyy}")
+            @Html.EditorFor(model => model.StartDatum)
             @Html.ValidationMessageFor(model => model.StartDatum)
         </div>
 
@@ -27,7 +27,7 @@
             @Html.LabelFor(model => model.EindDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.EindDatum, "{0:dd/MM/yyyy}")
+            @Html.EditorFor(model => model.EindDatum)
             @Html.ValidationMessageFor(model => model.EindDatum)
         </div>
 
@@ -112,11 +112,19 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Prijs)
+            @Html.LabelFor(model => model.BankrekeningNummer)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Prijs)
-            @Html.ValidationMessageFor(model => model.Prijs)
+            @Html.EditorFor(model => model.BankrekeningNummer)
+            @Html.ValidationMessageFor(model => model.BankrekeningNummer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FactuurNummer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FactuurNummer)
+            @Html.ValidationMessageFor(model => model.FactuurNummer)
         </div>
 
         <p>

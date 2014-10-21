@@ -17,11 +17,14 @@ namespace DomainModel
 
         [DataType(DataType.Date)]
         [Display(Name="Start-datum")]
-        public DateTime StartDatum { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> StartDatum { get; set; }
 
+        // ik had gevonden op google dat de display format zo moest voor het systeem omdat die het anders niet herkende.
+        // Het database Date format is ook yyyy-MM-dd
         [DataType(DataType.Date)]
-        [Display(Name = "Eind-datum")]
-        public DateTime EindDatum { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> EindDatum { get; set; }
 
 
         
@@ -37,7 +40,8 @@ namespace DomainModel
         public string Achternaam { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime GeboorteDatum { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> GeboorteDatum { get; set; }
         [Required]
         [Display(Name = "Man of Vrouw")]
         public string ManOfVrouw { get; set; }
@@ -47,16 +51,10 @@ namespace DomainModel
         public string Postcode { get; set; }
         [Required]
         public string Woonplaats { get; set; }
-
-        [Required(ErrorMessage = "Email is rhjhgjhjkjkhjk")]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress]
-        [Display(Name = "Email")]
         public string Email { get; set; }
         public int Prijs { get; set; }
+        [Display(Name="Factuuradres")]
         public int FactuurNummer { get; set; }
-        [Required]
-        [MaxLength(10, ErrorMessage="Bankrekeningnummer moet een lengte van 10 hebben!"), MinLength(10)]
         public string BankrekeningNummer { get; set; }
         public int Capaciteit { get; set; }
     }

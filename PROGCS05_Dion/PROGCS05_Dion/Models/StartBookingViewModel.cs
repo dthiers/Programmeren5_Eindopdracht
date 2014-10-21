@@ -15,6 +15,7 @@ namespace PROGCS05_Dion.Models
         [DataType(DataType.Date)]
         public DateTime EindDatum { get; set; }
 
+        [Display(Name="Capaciteit: 2,3 of 5")]
         public int Capaciteit { get; set; }
     }
 }
