@@ -40,29 +40,45 @@ namespace PROGCS05_Dion.Controllers
         public ActionResult ChooseRoom(StartBookingViewModel booking)
         {
             //Check of de capaciteit geldig is.
+            Boolean check = true;
 
             if (booking.Capaciteit != 2 || booking.Capaciteit != 3 || booking.Capaciteit != 5)
             {
+                check = false;
+            }
+            else if(booking.Capaciteit != 3)
+            {
+                check = false;
+            }
+            else if (booking.Capaciteit != 5)
+            {
+                check = false;
+            }
+            
+            if (check)
+            {
+                //Als een gebruiker de informatie heeft ingevuld ontvangen we dat model weer in deze action.
+
+                //op basis van de gegevens die de gebruiker heeft ingevoerd, gaan we filteren op de lijst van kamers.
+                //We willen een lisjt van kamers die voldoet aan de eisen van de gebruiker.
+
+                //database wordt repository bovenaan.
+                var model = bookingRepository.GetRooms()
+                    .Include(m => m.BookingList)
+                    .Where(k => k.Capaciteit == booking.Capaciteit);
+                // .Where(j => j.BookingList.ToList().ForEach(i => i.StartDatum != booking.BeginDatum));
+
+                //Ik geef de begin en eind datum mee aan de view omdat ik deze later in het 'proces' nog wil gebruikern
+                ViewBag.StartDate = booking.BeginDatum;
+                ViewBag.EndDate = booking.EindDatum;
+                ViewBag.Capacity = booking.Capaciteit;
+
+                return View(model);
+            }
+            else
+            {
                 return RedirectToAction("CreateBooking", new { errorMessage = "Kies een capaciteit van 2, 3 of 5!" });
             }
-
-            //Als een gebruiker de informatie heeft ingevuld ontvangen we dat model weer in deze action.
-
-            //op basis van de gegevens die de gebruiker heeft ingevoerd, gaan we filteren op de lijst van kamers.
-            //We willen een lisjt van kamers die voldoet aan de eisen van de gebruiker.
-
-            //database wordt repository bovenaan.
-            var model = bookingRepository.GetRooms()
-                .Include(m => m.BookingList)
-                .Where(k => k.Capaciteit == booking.Capaciteit);
-             // .Where(j => j.BookingList.ToList().ForEach(i => i.StartDatum != booking.BeginDatum));
-                
-            //Ik geef de begin en eind datum mee aan de view omdat ik deze later in het 'proces' nog wil gebruikern
-            ViewBag.StartDate = booking.BeginDatum;
-            ViewBag.EndDate = booking.EindDatum;
-            ViewBag.Capacity = booking.Capaciteit;
-
-            return View(model);
         }
 
         public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity, string errorMessage)
