@@ -235,12 +235,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Hotel\Index.cshtml" />
-    <Content Include="Views\Booking\ShowAllBookings.cshtml" />
-    <Content Include="Views\Booking\EditBooking.cshtml" />
-    <Content Include="Views\Booking\DetailsBooking.cshtml" />
-    <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\SelectBookingPeriod.cshtml" />
-    <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
     <Content Include="Views\Room\ShowAllRooms.cshtml" />
     <Content Include="Views\Room\DetailsRoom.cshtml" />
     <Content Include="Views\Room\EditRoom.cshtml" />
@@ -249,7 +244,12 @@
     <Content Include="Views\Booking\CreateBooking.cshtml" />
     <Content Include="Views\Booking\ChooseRoom.cshtml" />
     <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
-    <Content Include="Views\Booking\BookRoom.cshtml" />
+    <Content Include="Views\Booking\BookedRoom.cshtml" />
+    <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
+    <Content Include="Views\Booking\EditBooking.cshtml" />
+    <Content Include="Views\Booking\DetailsBooking.cshtml" />
+    <Content Include="Views\Booking\DeleteBooking.cshtml" />
+    <Content Include="Views\Booking\ShowAllBookings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

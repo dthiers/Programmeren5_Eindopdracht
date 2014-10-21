@@ -10,10 +10,19 @@
     @Html.ActionLink("Create New", "CreateBooking")
 </p>
 <p>
-    @Html.ActionLink("Return to index", "Index", "Hotel")
+    @Html.ActionLink("Back to list", "Index", "Hotel")
 </p>
 <table>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EindDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Voornaam)
         </th>
@@ -42,15 +51,6 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CheckInDatum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckOutDatum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kamer)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Prijs)
         </th>
         <th></th>
@@ -58,6 +58,15 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EindDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Voornaam)
         </td>
@@ -84,15 +93,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckInDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckOutDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kamer)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Prijs)

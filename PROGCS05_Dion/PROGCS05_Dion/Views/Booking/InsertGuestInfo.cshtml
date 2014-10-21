@@ -6,7 +6,7 @@
 
 <h2>InsertGuestInfo</h2>
 
-@using (Html.BeginForm("BookRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
+@using (Html.BeginForm("BookedRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -93,7 +93,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Hotel")
 </div>
 
 @section Scripts {

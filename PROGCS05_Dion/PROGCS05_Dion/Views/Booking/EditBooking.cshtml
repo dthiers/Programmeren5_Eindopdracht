@@ -16,6 +16,30 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.StartDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDatum, "{0:dd/MM/yyyy}")
+            @Html.ValidationMessageFor(model => model.StartDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EindDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EindDatum, "{0:dd/MM/yyyy}")
+            @Html.ValidationMessageFor(model => model.EindDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RoomId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RoomId)
+            @Html.ValidationMessageFor(model => model.RoomId)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
         </div>
         <div class="editor-field">
@@ -43,7 +67,7 @@
             @Html.LabelFor(model => model.GeboorteDatum)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.GeboorteDatum, "{0:dd/MM/yyyy}")
+            @Html.EditorFor(model => model.GeboorteDatum)
             @Html.ValidationMessageFor(model => model.GeboorteDatum)
         </div>
 
@@ -88,30 +112,6 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CheckInDatum)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CheckInDatum, "{0:dd/MM/yyyy}")
-            @Html.ValidationMessageFor(model => model.CheckInDatum)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CheckOutDatum)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CheckOutDatum, "{0:dd/MM/yyyy}")
-            @Html.ValidationMessageFor(model => model.CheckOutDatum)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Kamer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Kamer)
-            @Html.ValidationMessageFor(model => model.Kamer)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.Prijs)
         </div>
         <div class="editor-field">
@@ -126,7 +126,7 @@
 }
 
 <div>
-    @Html.ActionLink("Return to index", "Index", "Hotel")
+    @Html.ActionLink("Back to List", "Index", "Hotel")
 </div>
 
 @section Scripts {

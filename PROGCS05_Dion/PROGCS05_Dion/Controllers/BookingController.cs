@@ -73,11 +73,9 @@ namespace PROGCS05_Dion.Controllers
             return View(model);
         }
 
-        public ActionResult BookRoom(InformationViewModel information, int roomId, DateTime startDate, DateTime endDate, int capacity)
+        public ActionResult BookedRoom(InformationViewModel information, int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
-            //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
-            DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
-            DateTime hoogTariefEind = new DateTime(2015, 8, 31);
+            
 
             //Ik heb nu alle informatie die ik nodig heb om een booking te maken
             //Ik maak mijn object en sla hem op in de database
@@ -97,32 +95,8 @@ namespace PROGCS05_Dion.Controllers
             booking.Email = information.Email;
 
             // bereken prijs
-            int prijs = 0;
-
-            if (capacity == 2)
-            {
-                prijs = 20;
-            }
-            else if (capacity == 3)
-            {
-                prijs = 30;
-            }
-            else
-            {
-                prijs = 40;
-            }
-
-            for (DateTime date = booking.StartDatum; date <= booking.EindDatum; date = date.AddDays(1))
-            {
-                if (booking.StartDatum >= hoogTariefBegin && booking.EindDatum <= hoogTariefEind)
-                {
-                    prijs += 90;
-                }
-                else
-                {
-                    prijs += 60;
-                }
-            }
+            // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
+            int prijs = bookingRepository.CalculatePrice(capacity, booking.StartDatum, booking.EindDatum);
 
             booking.Prijs = prijs;
 
@@ -179,15 +153,16 @@ namespace PROGCS05_Dion.Controllers
         }
         [HttpPost]
         public ActionResult SelectBookingPeriod(FormCollection form) {
-            DateTime startDate = Convert.ToDateTime(Request["CheckInDatum"]);
-            DateTime endDate = Convert.ToDateTime(Request["CheckOutDatum"]);
+            DateTime startDate = Convert.ToDateTime(Request["StartDatum"]);
+            DateTime endDate = Convert.ToDateTime(Request["EindDatum"]);
 
             List<Booking> bookingListForPeriod = new List<Booking>();
 
             foreach (Booking b in bookingRepository.GetAll()) {
-                //if (b.CheckInDatum >= startDate && b.CheckInDatum <= endDate) {
-                //    bookingListForPeriod.Add(b);
-                //}
+                if (b.StartDatum >= startDate && b.StartDatum <= endDate
+                    || b.EindDatum >= startDate && b.EindDatum <= endDate) {
+                    bookingListForPeriod.Add(b);
+                }
             }
             IEnumerable<Booking> bookings = bookingListForPeriod;
             TempData["PeriodBookings"] = bookings;

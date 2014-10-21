@@ -10,6 +10,27 @@
     <legend>Booking</legend>
 
     <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EindDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EindDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RoomId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoomId)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.Voornaam)
     </div>
     <div class="display-field">
@@ -73,27 +94,6 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.CheckInDatum)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CheckInDatum)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CheckOutDatum)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CheckOutDatum)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Kamer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Kamer)
-    </div>
-
-    <div class="display-label">
          @Html.DisplayNameFor(model => model.Prijs)
     </div>
     <div class="display-field">
@@ -102,5 +102,5 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
-    @Html.ActionLink("Return to index", "Index", "Hotel")
+    @Html.ActionLink("Back to List", "Index", "Hotel")
 </p>

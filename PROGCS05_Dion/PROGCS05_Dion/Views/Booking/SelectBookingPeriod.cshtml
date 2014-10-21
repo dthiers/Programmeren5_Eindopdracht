@@ -17,19 +17,19 @@
         <legend>Booking</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CheckInDatum)
+            @Html.LabelFor(model => model.StartDatum)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.CheckInDatum, new { @type = "date" })
-            @Html.ValidationMessageFor(model => model.CheckInDatum)
+            @Html.EditorFor(model => model.StartDatum)
+            @Html.ValidationMessageFor(model => model.StartDatum)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CheckOutDatum)
+            @Html.LabelFor(model => model.EindDatum)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.CheckOutDatum, new { @type = "date" })
-            @Html.ValidationMessageFor(model => model.CheckOutDatum)
+            @Html.EditorFor(model => model.EindDatum)
+            @Html.ValidationMessageFor(model => model.EindDatum)
         </div>
 
         <p>

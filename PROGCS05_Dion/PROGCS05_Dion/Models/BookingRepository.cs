@@ -32,14 +32,7 @@ namespace PROGCS05_Dion.Models {
          * Return booking by ID
          * */
         public Booking GetBookingByID(int id) {
-            var b_list = GetAll();
-
-            foreach (var booking in b_list) {
-                if (booking.Id  ==id) {
-                    return booking;
-                }
-            }
-            return null;
+            return (dbContext.Bookingen.Where(b => b.Id == id).FirstOrDefault());
         }
 
         /*
@@ -55,14 +48,9 @@ namespace PROGCS05_Dion.Models {
          * Update booking in dbSet
          * */
         public Booking Update(Booking booking) {
-            var b_list = GetAll();
-
-            foreach (var b in b_list) {
-                if (b != null) {
-                    if (b.Id == booking.Id) {
-                        dbContext.Entry(b).CurrentValues.SetValues(booking);
-                    }
-                }
+            Booking b_update = dbContext.Bookingen.Where(b => b.Id == booking.Id).FirstOrDefault();
+            if (b_update != null) {
+                dbContext.Entry(b_update).CurrentValues.SetValues(booking);
             }
             dbContext.SaveChanges();
 
@@ -73,21 +61,44 @@ namespace PROGCS05_Dion.Models {
          * Delete booking from DbSet
          * */
         public void Delete(Booking booking) {
-            var b_list = GetAll();
+            var b_delete = dbContext.Bookingen.Where(b => b.Id == booking.Id).FirstOrDefault();
 
-            foreach (var b in b_list) {
-                if (b != null) {
-                    if (b.Id == booking.Id) {
-                        dbContext.Bookingen.Remove(b);
-                    }
-                }
+            if (b_delete != null){
+                dbContext.Bookingen.Remove(b_delete);
             }
             dbContext.SaveChanges();
         }
 
-        public DbSet<Room> GetRooms()
-        {
-            return bookingContext.Rooms;
+        public DbSet<Room> GetRooms(){
+            return dbContext.Rooms;
+        }
+
+        public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
+            //Ik maak een DateTime voor wanneer het hoogtarief start en wanneer het hoogtarief eindigt.
+            DateTime hoogTariefBegin = new DateTime(2015, 6, 1);
+            DateTime hoogTariefEind = new DateTime(2015, 8, 31);
+            
+            int prijs = 0;
+
+            if (capacity == 2) {
+                prijs = 20;
+            }
+            else if (capacity == 3) {
+                prijs = 30;
+            }
+            else {
+                prijs = 40;
+            }
+
+            for (DateTime date = startDatum; date <= eindDatum; date = date.AddDays(1)) {
+                if (startDatum >= hoogTariefBegin && eindDatum <= hoogTariefEind) {
+                    prijs += 90;
+                }
+                else {
+                    prijs += 60;
+                }
+            }
+            return prijs;
         }
     }
 }

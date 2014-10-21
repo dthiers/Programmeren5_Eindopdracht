@@ -1,10 +1,10 @@
 ﻿@model DomainModel.Booking
 
 @{
-    ViewBag.Title = "BookRoom";
+    ViewBag.Title = "BookedRoom";
 }
 
-<h2>BookRoom</h2>
+<h2>BookedRoom</h2>
 
 <fieldset>
     <legend>Booking</legend>
@@ -101,6 +101,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "EditRoom", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", "Hotel")
 </p>
