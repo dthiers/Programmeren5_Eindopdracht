@@ -87,7 +87,7 @@ namespace PROGCS05_Dion.Models {
 
         public DbSet<Room> GetRooms()
         {
-            return bookingContext.Rooms;
+            return dbContext.Rooms;
         }
     }
 }

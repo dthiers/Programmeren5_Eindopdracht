@@ -51,5 +51,10 @@ namespace DomainModel
         [Display(Name = "Emailadres")]
         public string Email { get; set; }
         public int Prijs { get; set; }
+        public int FactuurNummer { get; set; }
+        [Required]
+        [MaxLength(10, ErrorMessage="Bankrekeningnummer moet een lengte van 10 hebben!"), MinLength(10)]
+        public string BankrekeningNummer { get; set; }
+        public int Capaciteit { get; set; }
     }
 }
