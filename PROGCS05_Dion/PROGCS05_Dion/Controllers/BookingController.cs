@@ -47,11 +47,13 @@ namespace PROGCS05_Dion.Controllers
             if (booking.EindDatum <= booking.BeginDatum) {
                 return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "Reverse spacetimecontinuum doesn't exist" });
             }
-            var model = bookingRepository.GetRooms();
+
             int capacity = Convert.ToInt32(booking.Capaciteit);
 
-            model.Include(m => m.BookingList).Where(k => k.Capaciteit == capacity);
-
+            var model = bookingRepository.GetRooms()
+                    .Include(m => m.BookingList)
+                    .Where(k => k.Capaciteit == capacity);
+            
             ViewBag.StartDate = booking.BeginDatum;
             ViewBag.EndDate = booking.EindDatum;
             ViewBag.Capacity = booking.Capaciteit;
@@ -190,7 +192,6 @@ namespace PROGCS05_Dion.Controllers
          * 
          * */
 
-
         }
 
         public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
@@ -287,6 +288,9 @@ namespace PROGCS05_Dion.Controllers
             booking.Prijs = nieuwPrijs;
 
             var b_edit = bookingRepository.Update(booking, roomId);
+
+            Guest guest = guestRepository.GetGuestByID(booking.Id);
+      //      guestRepository.Update()
             return RedirectToAction("ShowAllBookings");
         }
 

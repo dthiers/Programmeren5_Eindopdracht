@@ -105,5 +105,15 @@ namespace PROGCS05_Dion.Models {
             }
             return prijs;
         }
+
+        public Boolean CanAddGuest(int id)
+        {
+            Booking booking = GetBookingByID(id);
+            if (booking.GuestList.Count == booking.Capaciteit)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

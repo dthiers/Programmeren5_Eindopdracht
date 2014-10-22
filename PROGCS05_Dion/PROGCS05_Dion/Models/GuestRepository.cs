@@ -51,7 +51,7 @@ namespace PROGCS05_Dion.Models {
 
         public void AddBookerAsGuest(Booking booking) {
             Guest g = new Guest();
-
+          
             g.BookingId = booking.Id;
             g.Voornaam = booking.Voornaam;
             g.Tussenvoegsel = booking.Tussenvoegsel;

@@ -137,6 +137,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Migrations\201410221907156_InitialCreate.cs" />
+    <Compile Include="Migrations\201410221907156_InitialCreate.Designer.cs">
+      <DependentUpon>201410221907156_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410221931595_EmailCheck.cs" />
+    <Compile Include="Migrations\201410221931595_EmailCheck.Designer.cs">
+      <DependentUpon>201410221931595_EmailCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
@@ -263,6 +272,7 @@
     <Content Include="Views\Shared\Main.cshtml" />
     <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Booking\ChooseRoom.cshtml" />
+    <Content Include="Views\Guest\ErrorGuest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,6 +285,14 @@
       <Project>{e1f49a0d-aa4c-47b9-8d27-2e9d28fe8377}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410221907156_InitialCreate.resx">
+      <DependentUpon>201410221907156_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410221931595_EmailCheck.resx">
+      <DependentUpon>201410221931595_EmailCheck.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

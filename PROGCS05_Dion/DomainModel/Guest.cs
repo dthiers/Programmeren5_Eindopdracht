@@ -31,6 +31,10 @@ namespace DomainModel {
         public string Postcode { get; set; }
         [Required]
         public string Woonplaats { get; set; }
+        [Required(ErrorMessage = "Email is required.")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }

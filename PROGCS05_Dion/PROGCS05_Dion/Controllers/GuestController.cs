@@ -9,10 +9,12 @@ using System.Web.Mvc;
 namespace PROGCS05_Dion.Controllers {
     public class GuestController : Controller {
         private GuestRepository guestRepository;
+        private BookingRepository bookingRepository;
         private Dropdowns d;
 
         public GuestController() {
             guestRepository = new GuestRepository();
+            bookingRepository = new BookingRepository();
             d = new Dropdowns();
         }
 
@@ -35,9 +37,14 @@ namespace PROGCS05_Dion.Controllers {
          * Create new guest
          * */
         public ActionResult CreateGuest(int bookingId) {
-            TempData["BookingId"] = bookingId;
-            ViewBag.sDrop = d.sDrop;
-            return View(guestRepository.Get());
+
+            if (bookingRepository.CanAddGuest(bookingId))
+            {
+                TempData["BookingId"] = bookingId;
+                ViewBag.sDrop = d.sDrop;
+                return View(guestRepository.Get());
+            }
+            return RedirectToAction("ErrorGuest");
         }
 
         [HttpPost]
@@ -84,6 +91,11 @@ namespace PROGCS05_Dion.Controllers {
             if (g_delete != null) { guestRepository.Delete(g_delete); }
 
             return RedirectToAction("ShowAllGuests");
+        }
+
+        public ActionResult ErrorGuest()
+        {
+            return View();
         }
     }
 }
