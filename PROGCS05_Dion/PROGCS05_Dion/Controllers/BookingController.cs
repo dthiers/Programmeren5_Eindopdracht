@@ -13,10 +13,13 @@ namespace PROGCS05_Dion.Controllers
     {
         private BookingRepository bookingRepository;
         private GuestRepository guestRepository;
+        private RoomRepository roomRepository;
+
         private Dropdowns d;
         public BookingController() {
             bookingRepository = new BookingRepository();
             guestRepository = new GuestRepository();
+            roomRepository = new RoomRepository();
             d = new Dropdowns();
         }
 
@@ -47,150 +50,57 @@ namespace PROGCS05_Dion.Controllers
             if (booking.EindDatum <= booking.BeginDatum) {
                 return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "Reverse spacetimecontinuum doesn't exist" });
             }
-            var model = bookingRepository.GetRooms();
+            
             int capacity = Convert.ToInt32(booking.Capaciteit);
-
-            model.Include(m => m.BookingList).Where(k => k.Capaciteit == capacity);
+            var model = bookingRepository.GetRooms().Include(m => m.BookingList).Where(k => k.Capaciteit == capacity);
 
             ViewBag.StartDate = booking.BeginDatum;
             ViewBag.EndDate = booking.EindDatum;
             ViewBag.Capacity = booking.Capaciteit;
 
-            return View(model);
-            /*
-             *
-             * 
-             *  List<Booking> b_list = new List<Booking>();
+            // lijst met lege kamers, die laat je sowieso zien.
+            List<Room> emptyRooms = bookingRepository.GetEmptyRooms();
+            List<Booking> allBookings = bookingRepository.GetAll();
+            List<Room> allRooms = roomRepository.GetAll();
+            List<Room> availableRooms = new List<Room>();
 
-            foreach (Room r in model) {
-                foreach (Booking b in r.BookingList) {
-                    b_list.Add(b);
-                }
-            }
-            List<Room> r_list = new List<Room>();
-
-            foreach (Room r in model) {
-                Boolean emptyRoom = true;
-                foreach (Booking b in b_list) {
-                    if (r.Id == b.Room.Id) {
-                        emptyRoom = false;
-                    }
-                }
-                if (emptyRoom) {
-                    r_list.Add(r);
-                }
-            }
-            // HOLY MOLY
-            foreach (var number in model) {
-                Boolean canAdd = false;
-                foreach (Booking b in b_list) {
-                    if ((booking.BeginDatum < b.StartDatum && booking.EindDatum < b.StartDatum) ||
-                        (booking.BeginDatum > b.EindDatum && booking.EindDatum > b.EindDatum)) {
-                        canAdd = true;
-                    }
-                    if (canAdd) {
-
-                        int c = Convert.ToInt32(booking.Capaciteit);
-                        if (b.Room.Capaciteit == c) {
-                            Boolean added = false;
-                            if (r_list.Count == 0) {
-                                r_list.Add(b.Room);
-                            }
-                            else {
-                                foreach (Room room in r_list) {
-                                    if (room.Id == b.Room.Id) {
-                                        if (!added) {
-                                            added = true;
-                                        }
-                                    }
-                                }
-                                if (!added) {
-                                    r_list.Add(b.Room);
-                                }
-                            }
-                        }
+            // Je houdt een lijst over met de kamers die je nog gaat bekijken in de boekingen
+            foreach (Room filled in allRooms.ToList()) {
+                foreach (Room empty in emptyRooms) {
+                    if (filled.Id == empty.Id) {
+                        allRooms.Remove(filled);
                     }
                 }
             }
-             * b = StartDatum 
-             * booking = BeginDatum
-             
 
+            foreach (Room filledRoom in allRooms) {
+                Boolean available = true;
+                foreach (Booking bookedBooking in allBookings) {
+                    // Id kan ik hier gebruiken
+                    if (!bookingRepository.DatesOverlapForRoom(
+                        booking.BeginDatum,
+                        booking.EindDatum,
+                        capacity,
+                        bookedBooking.Id,
+                        filledRoom.Id)) {
+                        available = false;
+                    }
+                    if (available) {
+                        availableRooms.Add(filledRoom);
+                    }
+                }
+            }
+            // Lege kamers toevoegen aan de lijst die getoond wordt
+            foreach (Room emptyRoom in emptyRooms) {
+                availableRooms.Add(emptyRoom);
+            }
+            // Als de lijst leeg is, dan zelfde view opnieuw laden
+            if (availableRooms.Count == 0) {
+                return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "No room available in that period of time" });
+            }
+            // Anders naar de volgende view met de beschikbare kamers
+            return View(availableRooms);
            
-            // HOLY MOLY
-            foreach (var number in model) {
-                Boolean cantAdd = false;
-               
-                    foreach (Booking b in b_list) {
-                        if (b.StartDatum == booking.BeginDatum || b.EindDatum == booking.EindDatum)
-                            cantAdd = true; // If any set is the same time, then by default there must be some overlap. 
-
-                        if (b.StartDatum < booking.BeginDatum) {
-                            if (b.EindDatum > booking.BeginDatum && b.EindDatum < booking.EindDatum)
-                                cantAdd = true; // Condition 1
-
-                            if (b.EindDatum > booking.EindDatum)
-                                cantAdd = true; // Condition 3
-                        }
-                        else {
-                            if (booking.EindDatum > b.StartDatum && booking.EindDatum < b.EindDatum)
-                                cantAdd = true; // Condition 2
-
-                            if (booking.EindDatum > b.EindDatum)
-                                cantAdd = true; // Condition 4
-                        }
-                    }
-
-                    if (!cantAdd) {
-
-                        int c = Convert.ToInt32(booking.Capaciteit);
-                        if (b.Room.Capaciteit == c) {
-                            Boolean added = false;
-                            if (r_list.Count == 0) {
-                                r_list.Add(b.Room);
-                            }
-                            else {
-                                foreach (Room room in r_list) {
-                                    if (room.Id == b.Room.Id) {
-                                        if (!added) {
-                                            added = true;
-                                        }
-                                    }
-                                }
-                                if (!added) {
-                                    r_list.Add(b.Room);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-        /*
-            //Boolean cantAdd = false;
-            foreach (Booking b in b_list) {
-                if (b.StartDatum == booking.BeginDatum || b.EindDatum == booking.EindDatum)
-                    cantAdd = true; // If any set is the same time, then by default there must be some overlap. 
-
-                if (b.StartDatum < booking.BeginDatum) {
-                    if (b.EindDatum > booking.BeginDatum && b.EindDatum < booking.EindDatum)
-                        cantAdd= true; // Condition 1
-
-                    if (b.EindDatum > booking.EindDatum)
-                        cantAdd =true; // Condition 3
-                }
-                else {
-                    if (booking.EindDatum > b.StartDatum && booking.EindDatum < b.EindDatum)
-                        cantAdd =true; // Condition 2
-
-                    if (booking.EindDatum > b.EindDatum)
-                        cantAdd= true; // Condition 4
-                }
-            }
-         * 
-         * */
-
-
         }
 
         public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
@@ -215,7 +125,6 @@ namespace PROGCS05_Dion.Controllers
            
             var booking = new Booking();
 
-            booking.Room = room;
             booking.StartDatum = startDate;
             booking.EindDatum = endDate;
             booking.RoomId = room.Id;
@@ -250,6 +159,7 @@ namespace PROGCS05_Dion.Controllers
         {
             // genereer een random factuurnummer
             Booking booking = (Booking)TempData["booking"];
+            TempData["Roomid"] = booking.RoomId;
 
             Random random = new Random();
             string nummer = "";
@@ -294,7 +204,7 @@ namespace PROGCS05_Dion.Controllers
          * Show details of booking
          * */
         public ActionResult DetailsBooking(int id) {
-            var b_details = bookingRepository.GetBookingByID(id);
+            Booking b_details = bookingRepository.GetBookingByID(id);
             return View(b_details);
         }
 
