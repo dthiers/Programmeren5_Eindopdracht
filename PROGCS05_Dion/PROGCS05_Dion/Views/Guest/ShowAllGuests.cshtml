@@ -1,27 +1,19 @@
-﻿@model IEnumerable<DomainModel.Booking>
+﻿@model IEnumerable<DomainModel.Guest>
 
 @{
-    ViewBag.Title = "ShowAllBookings";
+    ViewBag.Title = "ShowAllGuests";
 }
 
-<h2>ShowAllBookings</h2>
-
-<p>
-    @Html.ActionLink("Add new booking", "CreateBooking")
-</p>
 <p>
     @Html.ActionLink("Home", "Index", "Hotel")
 </p>
+
+<h2>ShowAllGuests</h2>
+
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StartDatum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EindDatum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomId)
+            @Html.DisplayNameFor(model => model.BookingId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Voornaam)
@@ -50,28 +42,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bankrekeningnummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capaciteit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prijs)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EindDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomId)
+            @Html.DisplayFor(modelItem => item.BookingId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Voornaam)
@@ -101,21 +78,10 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Prijs)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BankrekeningNummer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capaciteit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prijs)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditBooking", new { id=item.Id }) |
-            @Html.ActionLink("Details", "DetailsBooking", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteBooking", new { id=item.Id })
+            @Html.ActionLink("Edit", "EditGuest", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsGuest", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteGuest", new { id=item.Id })
+            @Html.ActionLink("Show booking", "DetailsBooking", "Booking", new { id = item.Id }, null)
         </td>
     </tr>
 }

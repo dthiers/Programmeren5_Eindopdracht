@@ -25,8 +25,6 @@ namespace DomainModel
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> EindDatum { get; set; }
-
-
         
         public int RoomId { get; set; }
 
@@ -57,5 +55,7 @@ namespace DomainModel
         public int FactuurNummer { get; set; }
         public string BankrekeningNummer { get; set; }
         public int Capaciteit { get; set; }
+
+        public virtual ICollection<Guest> GuestList { get; set; }  
     }
 }

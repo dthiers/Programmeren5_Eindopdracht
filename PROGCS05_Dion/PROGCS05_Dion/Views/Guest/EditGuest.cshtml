@@ -1,18 +1,27 @@
-﻿@model PROGCS05_Dion.InformationViewModel
+﻿@model DomainModel.Guest
 
 @{
-    ViewBag.Title = "InsertGuestInfo";
+    ViewBag.Title = "EditGuest";
 }
 
-<h2>InsertGuestInfo</h2>
+<h2>EditGuest</h2>
 
-@using (Html.BeginForm("BookedRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>InformationViewModel</legend>
+        <legend>Guest</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BookingId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BookingId)
+            @Html.ValidationMessageFor(model => model.BookingId)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
@@ -86,22 +95,14 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Bankrekeningnummer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Bankrekeningnummer)
-            @Html.ValidationMessageFor(model => model.Bankrekeningnummer)
-        </div>
-
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Cancel", "Index", "Hotel")
+    @Html.ActionLink("Home", "Index", "Hotel")
 </div>
 
 @section Scripts {

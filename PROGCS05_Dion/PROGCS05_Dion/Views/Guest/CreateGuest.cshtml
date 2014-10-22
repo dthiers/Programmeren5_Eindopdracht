@@ -1,18 +1,17 @@
-﻿@model PROGCS05_Dion.InformationViewModel
+﻿@model DomainModel.Guest
 
 @{
-    ViewBag.Title = "InsertGuestInfo";
+    ViewBag.Title = "CreateGuest";
 }
 
-<h2>InsertGuestInfo</h2>
+<h2>CreateGuest</h2>
 
-@using (Html.BeginForm("BookedRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>InformationViewModel</legend>
+        <legend>Guest</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
@@ -86,14 +85,6 @@
             @Html.ValidationMessageFor(model => model.Email)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Bankrekeningnummer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Bankrekeningnummer)
-            @Html.ValidationMessageFor(model => model.Bankrekeningnummer)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -101,7 +92,7 @@
 }
 
 <div>
-    @Html.ActionLink("Cancel", "Index", "Hotel")
+    @Html.ActionLink("Back to list", "ShowAllGuests")
 </div>
 
 @section Scripts {

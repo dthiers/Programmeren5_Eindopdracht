@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\BookingController.cs" />
@@ -143,7 +144,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
+    <Compile Include="Models\GuestRepository.cs" />
     <Compile Include="Models\IBookingRepository.cs" />
+    <Compile Include="Models\IGuestRepository.cs" />
     <Compile Include="Models\InformationViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\IRoomRepository.cs" />
@@ -252,6 +255,11 @@
     <Content Include="Views\Booking\DetailsBooking.cshtml" />
     <Content Include="Views\Booking\DeleteBooking.cshtml" />
     <Content Include="Views\Booking\ShowAllBookings.cshtml" />
+    <Content Include="Views\Guest\CreateGuest.cshtml" />
+    <Content Include="Views\Guest\EditGuest.cshtml" />
+    <Content Include="Views\Guest\DeleteGuest.cshtml" />
+    <Content Include="Views\Guest\DetailsGuest.cshtml" />
+    <Content Include="Views\Guest\ShowAllGuests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

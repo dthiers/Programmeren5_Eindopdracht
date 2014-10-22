@@ -1,34 +1,20 @@
-﻿@model DomainModel.Booking
+﻿@model DomainModel.Guest
 
 @{
-    ViewBag.Title = "DetailsBooking";
+    ViewBag.Title = "DeleteGuest";
 }
 
-<h2>DetailsBooking</h2>
+<h2>DeleteGuest</h2>
 
+<h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>Booking</legend>
+    <legend>Guest</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.StartDatum)
-    </div>
-
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StartDatum)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EindDatum)
+         @Html.DisplayNameFor(model => model.BookingId)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.EindDatum)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RoomId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RoomId)
+        @Html.DisplayFor(model => model.BookingId)
     </div>
 
     <div class="display-label">
@@ -93,36 +79,11 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Email)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Prijs)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Prijs)
-    </div>
-
-    <div>
-        <h3>Guests</h3>
-    </div>
-
-    <div>
-        @foreach (var item in (Model.GuestList))
-        {
-            <table>
-                <tr>
-                    <td>
-                        @using (Html.BeginForm("DetailsGuest", "Guest", new { id = item.Id }))
-                        {
-                            <input type="submit" value="Go to: @item.Voornaam @item.Achternaam" />
-                        }
-                    </td>
-                </tr>
-            </table>
-        }
-    </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
-    @Html.ActionLink("Add Guest", "CreateGuest", "Guest", new { bookingId = Model.Id }, null)
-    @Html.ActionLink("Home", "Index", "Hotel")
-</p>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Home", "Index", "Hotel")
+    </p>
+}

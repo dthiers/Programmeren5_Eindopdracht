@@ -12,8 +12,11 @@ namespace PROGCS05_Dion.Controllers
     public class BookingController : Controller
     {
         private BookingRepository bookingRepository;
+        private GuestRepository guestRepository;
+
         public BookingController() {
             bookingRepository = new BookingRepository();
+            guestRepository = new GuestRepository();
         }
 
 
@@ -153,6 +156,10 @@ namespace PROGCS05_Dion.Controllers
             booking.FactuurNummer = factuurNummer;
 
             bookingRepository.Create(booking);
+
+            // voeg deze persoon toe als gast
+            guestRepository.AddBookerAsGuest(booking);
+
             return View(booking);
         }
 
@@ -178,6 +185,9 @@ namespace PROGCS05_Dion.Controllers
          * */
         public ActionResult DetailsBooking(int id) {
             var b_details = bookingRepository.GetBookingByID(id);
+
+            ViewData["g_BookingId"] = guestRepository.GetGuestByBookingId(id);
+
             return View(b_details);
         }
 
