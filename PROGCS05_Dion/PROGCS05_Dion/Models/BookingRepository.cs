@@ -35,6 +35,12 @@ namespace PROGCS05_Dion.Models {
             return (dbContext.Bookingen.Where(b => b.Id == id).FirstOrDefault());
                 }
 
+        public Booking SetRoomIdForBooking(int roomId, int bookingId) {
+            Booking changeRoomId = GetBookingByID(bookingId);
+            changeRoomId.RoomId = roomId;
+            dbContext.SaveChanges();
+            return changeRoomId;
+        }
         /*
          * Create booking and save to DbSet
          * */
@@ -104,6 +110,42 @@ namespace PROGCS05_Dion.Models {
                 }
             }
             return prijs;
+        }
+
+        public List<Room> GetEmptyRooms() {
+            // Ik heb alle kamers (id en capaciteit)
+            var allRooms = dbContext.Rooms.ToList();
+            var allBookings = dbContext.Bookingen.ToList();
+
+            // allRooms wordt nu eigenlijk emptyRooms, dus ik rename 'm wel jonge
+            foreach (Room r in allRooms.ToList()) {
+                foreach (Booking b in allBookings) {
+                    if (b.Id == r.Id) {
+                        allRooms.Remove(r);
+                    }
+                }
+            }
+            // Overschrijven ivm logische naamgeving.
+            var emptyRooms = allRooms;
+            return emptyRooms;
+        }
+
+        public Boolean DatesOverlapForRoom(DateTime startDatum, DateTime eindDatum, int capaciteit, int id, int roomId) {
+            // We willen kijken of het kamernummer dat aan deze boeking gekoppeld is, vrij is van startDatum tm eindDatum
+            Booking b = GetBookingByID(id);
+
+            Boolean before = false;
+            Boolean after = false;
+            if (b.Capaciteit == capaciteit) {
+                if (startDatum < b.StartDatum && eindDatum < b.StartDatum) {
+                    before = true;
+                }
+                if (startDatum > b.StartDatum && eindDatum > b.EindDatum) {
+                    after = true;
+                }
+            }
+            return before && after;
+            // hier verder gaan ofzo
         }
     }
 }
