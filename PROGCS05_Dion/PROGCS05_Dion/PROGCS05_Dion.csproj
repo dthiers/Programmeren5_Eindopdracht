@@ -144,6 +144,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
+    <Compile Include="Models\Dropdowns.cs" />
     <Compile Include="Models\GuestRepository.cs" />
     <Compile Include="Models\IBookingRepository.cs" />
     <Compile Include="Models\IGuestRepository.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\IRoomRepository.cs" />
     <Compile Include="Models\RoomRepository.cs" />
+    <Compile Include="Models\RoomViewModel.cs" />
     <Compile Include="Models\StartBookingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -238,7 +240,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Hotel\Index.cshtml" />
     <Content Include="Views\Booking\SelectBookingPeriod.cshtml" />
     <Content Include="Views\Room\ShowAllRooms.cshtml" />
     <Content Include="Views\Room\DetailsRoom.cshtml" />
@@ -246,7 +247,6 @@
     <Content Include="Views\Room\DeleteRoom.cshtml" />
     <Content Include="Views\Room\CreateRoom.cshtml" />
     <Content Include="Views\Booking\CreateBooking.cshtml" />
-    <Content Include="Views\Booking\ChooseRoom.cshtml" />
     <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
     <Content Include="Views\Booking\Invoice.cshtml" />
     <Content Include="Views\Booking\BookedRoom.cshtml" />
@@ -260,6 +260,9 @@
     <Content Include="Views\Guest\DeleteGuest.cshtml" />
     <Content Include="Views\Guest\DetailsGuest.cshtml" />
     <Content Include="Views\Guest\ShowAllGuests.cshtml" />
+    <Content Include="Views\Shared\Main.cshtml" />
+    <Content Include="Views\Hotel\Index.cshtml" />
+    <Content Include="Views\Booking\ChooseRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

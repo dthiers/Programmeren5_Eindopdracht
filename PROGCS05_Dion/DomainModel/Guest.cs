@@ -12,9 +12,7 @@ namespace DomainModel {
         public int Id { get; set; }
 
         public int BookingId { get; set; }
-        [ForeignKey("BookingId")]
-        public virtual Booking Booking { get; set; }
-
+        
         [Required]
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }

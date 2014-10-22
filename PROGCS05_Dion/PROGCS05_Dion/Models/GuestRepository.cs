@@ -21,16 +21,6 @@ namespace PROGCS05_Dion.Models {
             return dbContext.Guests.ToList();
         }
 
-        public List<Guest> GetGuestByBookingId(int bookingId) {
-            List<Guest> g_BookingId = new List<Guest>();
-            foreach (Guest g in GetAll()) {
-                if (g.BookingId == bookingId) {
-                    g_BookingId.Add(g);
-                }
-            }
-            return g_BookingId;
-        }
-
         public Guest GetGuestByID(int id) {
             return dbContext.Guests.Where(g => g.Id == id).FirstOrDefault();
         }
@@ -41,7 +31,7 @@ namespace PROGCS05_Dion.Models {
             return guest;
         }
 
-        public Guest Update(Guest guest) {
+        public Guest Update(Guest guest, int bookingId) {
             Guest g_update = dbContext.Guests.Where(g => g.Id == guest.Id).FirstOrDefault();
             if (g_update != null) {
                 dbContext.Entry(g_update).CurrentValues.SetValues(guest);

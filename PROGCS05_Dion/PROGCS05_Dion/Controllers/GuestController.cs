@@ -9,9 +9,11 @@ using System.Web.Mvc;
 namespace PROGCS05_Dion.Controllers {
     public class GuestController : Controller {
         private GuestRepository guestRepository;
+        private Dropdowns d;
 
         public GuestController() {
             guestRepository = new GuestRepository();
+            d = new Dropdowns();
         }
 
         /*
@@ -34,14 +36,16 @@ namespace PROGCS05_Dion.Controllers {
          * */
         public ActionResult CreateGuest(int bookingId) {
             TempData["BookingId"] = bookingId;
+            ViewBag.sDrop = d.sDrop;
             return View(guestRepository.Get());
         }
 
         [HttpPost]
         [ActionName("CreateGuest")]
-        public ActionResult CreatRoomPost(Guest guest) {
+        public ActionResult CreateGuestPost(Guest guest) {
+            int id = (int)TempData["BookingId"];
+            guest.BookingId = id;
             if (guest != null) {
-                guest.BookingId = (int)TempData["BookingId"];
                 guestRepository.Create(guest);
             }
             return RedirectToAction("ShowAllGuests");
@@ -52,14 +56,15 @@ namespace PROGCS05_Dion.Controllers {
          * */
         public ActionResult EditGuest(int id) {
             var r_edit = guestRepository.GetGuestByID(id);
+            ViewBag.sDrop = d.sDrop;
             return View(r_edit);
         }
 
         [HttpPost]
         [ActionName("EditGuest")]
-        public ActionResult EditGuest(Guest guest) {
+        public ActionResult EditGuest(Guest guest, int bookingId) {
 
-            if (guest != null) { guestRepository.Update(guest); }
+            if (guest != null) { guestRepository.Update(guest, bookingId); }
 
             return RedirectToAction("DetailsGuest", new { id = guest.Id });
         }

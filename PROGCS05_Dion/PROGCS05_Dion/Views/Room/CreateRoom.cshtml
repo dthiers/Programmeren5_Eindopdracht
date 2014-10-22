@@ -17,7 +17,7 @@
             @Html.LabelFor(model => model.Capaciteit)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Capaciteit)
+            @Html.DropDownListFor(model => model.Capaciteit, new SelectList(ViewBag.cDrop, "value", "text"))
             @Html.ValidationMessageFor(model => model.Capaciteit)
         </div>
 

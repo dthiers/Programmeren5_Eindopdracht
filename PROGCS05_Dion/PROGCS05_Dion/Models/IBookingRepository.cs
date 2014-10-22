@@ -9,7 +9,7 @@ namespace PROGCS05_Dion.Models {
         Booking Get();
         List<Booking> GetAll();
         Booking Create(Booking booking);
-        Booking Update(Booking booking);
+        Booking Update(Booking booking, int roomId);
         void Delete(Booking booking);
     }
 }

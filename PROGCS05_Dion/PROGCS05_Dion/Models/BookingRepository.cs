@@ -47,7 +47,7 @@ namespace PROGCS05_Dion.Models {
         /*
          * Update booking in dbSet
          * */
-        public Booking Update(Booking booking) {
+        public Booking Update(Booking booking, int roomId) {
             Booking b_update = dbContext.Bookingen.Where(b => b.Id == booking.Id).FirstOrDefault();
             if (b_update != null) {
                 dbContext.Entry(b_update).CurrentValues.SetValues(booking);

@@ -7,7 +7,7 @@
 <h2>ChooseRoom</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateRoom")
+    @Html.ActionLink("Create New", "CreateRoom", "Room")
 </p>
 <table>
     <tr>
@@ -19,18 +19,18 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capaciteit)
-        </td>
-        <td>
-            @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }) |
-        </td>
-    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capaciteit)
+            </td>
+            <td>
+                @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }) |
+            </td>
+        </tr>
 }
 
 </table>

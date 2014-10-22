@@ -13,9 +13,11 @@ namespace PROGCS05_Dion.Controllers
     {
         private BookingRepository bookingRepository;
         private GuestRepository guestRepository;
+        private Dropdowns d;
         public BookingController() {
             bookingRepository = new BookingRepository();
             guestRepository = new GuestRepository();
+            d = new Dropdowns();
         }
 
 
@@ -35,106 +37,213 @@ namespace PROGCS05_Dion.Controllers
             StartBookingViewModel model = new StartBookingViewModel();
             //Errormessage als er een verkeerde capaciteit is gekozen
             ViewBag.ErrorMessage = errorMessage;
+            ViewBag.cDrop = d.cDrop;
             //Dit geven we mee aan de view
             return View(model);
         }
 
         public ActionResult ChooseRoom(StartBookingViewModel booking)
         {
-            //Check of de capaciteit geldig is.
-            Boolean check = false;
-
-            if (booking.Capaciteit == 2 || booking.Capaciteit == 3 || booking.Capaciteit == 5)
-            {
-                check = true;
+            if (booking.EindDatum <= booking.BeginDatum) {
+                return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "Reverse spacetimecontinuum doesn't exist" });
             }
-            
-            if (check)
-            {
-                //Als een gebruiker de informatie heeft ingevuld ontvangen we dat model weer in deze action.
+            var model = bookingRepository.GetRooms();
+            int capacity = Convert.ToInt32(booking.Capaciteit);
 
-                //op basis van de gegevens die de gebruiker heeft ingevoerd, gaan we filteren op de lijst van kamers.
-                //We willen een lisjt van kamers die voldoet aan de eisen van de gebruiker.
+            model.Include(m => m.BookingList).Where(k => k.Capaciteit == capacity);
 
-                //database wordt repository bovenaan.
-                var model = bookingRepository.GetRooms()
-                    .Include(m => m.BookingList)
-                    .Where(k => k.Capaciteit == booking.Capaciteit);
-                // .Where(j => j.BookingList.ToList().ForEach(i => i.StartDatum != booking.BeginDatum));
+            ViewBag.StartDate = booking.BeginDatum;
+            ViewBag.EndDate = booking.EindDatum;
+            ViewBag.Capacity = booking.Capaciteit;
 
-                //Ik geef de begin en eind datum mee aan de view omdat ik deze later in het 'proces' nog wil gebruikern
-                ViewBag.StartDate = booking.BeginDatum;
-                ViewBag.EndDate = booking.EindDatum;
-                ViewBag.Capacity = booking.Capaciteit;
+            return View(model);
+            /*
+             *
+             * 
+             *  List<Booking> b_list = new List<Booking>();
 
-                return View(model);
+            foreach (Room r in model) {
+                foreach (Booking b in r.BookingList) {
+                    b_list.Add(b);
+                }
             }
-            else
-            {
-                return RedirectToAction("CreateBooking", new { errorMessage = "Kies een capaciteit van 2, 3 of 5!" });
+            List<Room> r_list = new List<Room>();
+
+            foreach (Room r in model) {
+                Boolean emptyRoom = true;
+                foreach (Booking b in b_list) {
+                    if (r.Id == b.Room.Id) {
+                        emptyRoom = false;
+                    }
+                }
+                if (emptyRoom) {
+                    r_list.Add(r);
+                }
             }
+            // HOLY MOLY
+            foreach (var number in model) {
+                Boolean canAdd = false;
+                foreach (Booking b in b_list) {
+                    if ((booking.BeginDatum < b.StartDatum && booking.EindDatum < b.StartDatum) ||
+                        (booking.BeginDatum > b.EindDatum && booking.EindDatum > b.EindDatum)) {
+                        canAdd = true;
+                    }
+                    if (canAdd) {
+
+                        int c = Convert.ToInt32(booking.Capaciteit);
+                        if (b.Room.Capaciteit == c) {
+                            Boolean added = false;
+                            if (r_list.Count == 0) {
+                                r_list.Add(b.Room);
+                            }
+                            else {
+                                foreach (Room room in r_list) {
+                                    if (room.Id == b.Room.Id) {
+                                        if (!added) {
+                                            added = true;
+                                        }
+                                    }
+                                }
+                                if (!added) {
+                                    r_list.Add(b.Room);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+             * b = StartDatum 
+             * booking = BeginDatum
+             
+
+           
+            // HOLY MOLY
+            foreach (var number in model) {
+                Boolean cantAdd = false;
+               
+                    foreach (Booking b in b_list) {
+                        if (b.StartDatum == booking.BeginDatum || b.EindDatum == booking.EindDatum)
+                            cantAdd = true; // If any set is the same time, then by default there must be some overlap. 
+
+                        if (b.StartDatum < booking.BeginDatum) {
+                            if (b.EindDatum > booking.BeginDatum && b.EindDatum < booking.EindDatum)
+                                cantAdd = true; // Condition 1
+
+                            if (b.EindDatum > booking.EindDatum)
+                                cantAdd = true; // Condition 3
+                        }
+                        else {
+                            if (booking.EindDatum > b.StartDatum && booking.EindDatum < b.EindDatum)
+                                cantAdd = true; // Condition 2
+
+                            if (booking.EindDatum > b.EindDatum)
+                                cantAdd = true; // Condition 4
+                        }
+                    }
+
+                    if (!cantAdd) {
+
+                        int c = Convert.ToInt32(booking.Capaciteit);
+                        if (b.Room.Capaciteit == c) {
+                            Boolean added = false;
+                            if (r_list.Count == 0) {
+                                r_list.Add(b.Room);
+                            }
+                            else {
+                                foreach (Room room in r_list) {
+                                    if (room.Id == b.Room.Id) {
+                                        if (!added) {
+                                            added = true;
+                                        }
+                                    }
+                                }
+                                if (!added) {
+                                    r_list.Add(b.Room);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        /*
+            //Boolean cantAdd = false;
+            foreach (Booking b in b_list) {
+                if (b.StartDatum == booking.BeginDatum || b.EindDatum == booking.EindDatum)
+                    cantAdd = true; // If any set is the same time, then by default there must be some overlap. 
+
+                if (b.StartDatum < booking.BeginDatum) {
+                    if (b.EindDatum > booking.BeginDatum && b.EindDatum < booking.EindDatum)
+                        cantAdd= true; // Condition 1
+
+                    if (b.EindDatum > booking.EindDatum)
+                        cantAdd =true; // Condition 3
+                }
+                else {
+                    if (booking.EindDatum > b.StartDatum && booking.EindDatum < b.EindDatum)
+                        cantAdd =true; // Condition 2
+
+                    if (booking.EindDatum > b.EindDatum)
+                        cantAdd= true; // Condition 4
+                }
+            }
+         * 
+         * */
+
+
         }
 
         public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
+            ViewBag.sDrop = d.sDrop;
             InformationViewModel model = new InformationViewModel();
 
-            /*
-             * dit wouden we eerst doen maar om een of ander reden geeft dit null als ik informatie opvraag bij BookKamer. 
-            model.BookingInformation.BeginDatum = beginDatum;
-            model.BookingInformation.EindDatum = eindDatum;
+            Room room = new Room();
+            room.Capaciteit = capacity;
+            room.Id = roomId;
 
-            Als ik in de andere ActionResult kom, dan is alles ingevuld behalve de begin en eind datum die je in het begin moest kiezen
-             * */
-            ViewBag.RoomId = roomId;
             ViewBag.StartDate = startDate;
             ViewBag.EndDate = endDate;
-            ViewBag.Capacity = capacity;
+            TempData["Room"] = room;
 
             return View(model);
         }
 
-        public ActionResult BookedRoom(InformationViewModel information, int roomId, DateTime startDate, DateTime endDate, int capacity)
+        public ActionResult BookedRoom(InformationViewModel information,DateTime startDate, DateTime endDate)
         {
+            Room room = (Room)TempData["Room"];
+           
+            var booking = new Booking();
 
-            if (ModelState.IsValid) {
+            booking.Room = room;
+            booking.StartDatum = startDate;
+            booking.EindDatum = endDate;
+            booking.RoomId = room.Id;
+            booking.Voornaam = information.Voornaam;
+            booking.Tussenvoegsel = information.Tussenvoegsel;
+            booking.Achternaam = information.Achternaam;
+            booking.GeboorteDatum = information.GeboorteDatum;
+            booking.ManOfVrouw = information.ManOfVrouw;
+            booking.Adres = information.Adres;
+            booking.Postcode = information.Postcode;
+            booking.Woonplaats = information.Woonplaats;
+            booking.Email = information.Email;
+            booking.BankrekeningNummer = information.Bankrekeningnummer;
+            booking.Capaciteit = room.Capaciteit;
 
-                //Ik heb nu alle informatie die ik nodig heb om een booking te maken
-                //Ik maak mijn object en sla hem op in de database
-                var booking = new Booking();
+            // bereken prijs
+            // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
+            int prijs = bookingRepository.CalculatePrice(booking.Capaciteit, booking.StartDatum, booking.EindDatum);
 
-                booking.StartDatum = startDate;
-                booking.EindDatum = endDate;
-                booking.RoomId = roomId;
-                booking.Voornaam = information.Voornaam;
-                booking.Tussenvoegsel = information.Tussenvoegsel;
-                booking.Achternaam = information.Achternaam;
-                booking.GeboorteDatum = information.GeboorteDatum;
-                booking.ManOfVrouw = information.ManOfVrouw;
-                booking.Adres = information.Adres;
-                booking.Postcode = information.Postcode;
-                booking.Woonplaats = information.Woonplaats;
-                booking.Email = information.Email;
-                booking.BankrekeningNummer = information.Bankrekeningnummer;
-                booking.Capaciteit = capacity;
+            booking.Prijs = prijs;
 
-                // bereken prijs
-                // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
-                int prijs = bookingRepository.CalculatePrice(capacity, booking.StartDatum, booking.EindDatum);
+            // Het idee was om de booking mee te geven in zonder TempData, maar dat lukte niet omdat het anders null terug gaf
+            // op sommige plekken.
 
-                booking.Prijs = prijs;
+            TempData["booking"] = booking;
+            //Op het einde toon ik de opgeslage booking aan de gebruiker
 
-                // Het idee was om de booking mee te geven in zonder TempData, maar dat lukte niet omdat het anders null terug gaf
-                // op sommige plekken.
-
-                TempData["booking"] = booking;
-                //Op het einde toon ik de opgeslage booking aan de gebruiker
-
-                return View(booking);
-            }
-            else {
-                return RedirectToAction("InsertGuestInfo", new { roomId = roomId, startDate = startDate, endDate = endDate, capacity = capacity });
-            }
+            return View(booking);
         }
 
         public ActionResult Invoice()
@@ -154,10 +263,11 @@ namespace PROGCS05_Dion.Controllers
 
             booking.FactuurNummer = factuurNummer;
 
+            bookingRepository.Create(booking);
+
             // voeg deze persoon toe als gast
             guestRepository.AddBookerAsGuest(booking);
 
-            bookingRepository.Create(booking);
             return View(booking);
         }
 
@@ -166,15 +276,17 @@ namespace PROGCS05_Dion.Controllers
          * */
         public ActionResult EditBooking(int id) {
             var b_edit = bookingRepository.GetBookingByID(id);
+            ViewBag.cDrop = d.cDrop;
+            ViewBag.sDrop = d.sDrop;
             return View(b_edit);
         }
         [HttpPost]
-        public ActionResult EditBooking(Booking booking) {
+        public ActionResult EditBooking(Booking booking, int roomId) {
 
             int nieuwPrijs = bookingRepository.CalculatePrice(booking.Capaciteit, booking.StartDatum, booking.EindDatum);
             booking.Prijs = nieuwPrijs;
 
-            var b_edit = bookingRepository.Update(booking);
+            var b_edit = bookingRepository.Update(booking, roomId);
             return RedirectToAction("ShowAllBookings");
         }
 

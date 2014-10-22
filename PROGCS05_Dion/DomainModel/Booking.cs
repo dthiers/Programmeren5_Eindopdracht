@@ -30,7 +30,7 @@ namespace DomainModel
         public int RoomId { get; set; }
 
         [ForeignKey("RoomId")]
-        public virtual Room kamer { get; set; }
+        public virtual Room Room { get; set; }
 
         [Required]
         public string Voornaam { get; set; }

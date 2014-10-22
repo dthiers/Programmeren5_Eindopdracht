@@ -50,7 +50,7 @@
             @Html.LabelFor(model => model.ManOfVrouw)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ManOfVrouw)
+           @Html.DropDownListFor(model => model.ManOfVrouw, new SelectList(ViewBag.sDrop, "value", "text"))
             @Html.ValidationMessageFor(model => model.ManOfVrouw)
         </div>
 

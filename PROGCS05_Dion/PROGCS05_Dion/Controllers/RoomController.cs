@@ -11,8 +11,10 @@ namespace PROGCS05_Dion.Controllers
     public class RoomController : Controller
     {
         private RoomRepository roomRepository;
+        private Dropdowns d;
         public RoomController() {
             roomRepository = new RoomRepository();
+            d = new Dropdowns();
         }
 
         /*
@@ -43,6 +45,7 @@ namespace PROGCS05_Dion.Controllers
          * Create new room
          * */
         public ActionResult CreateRoom() {
+            ViewBag.cDrop = d.cDrop;
             return View(roomRepository.Get());
         }
 
@@ -58,19 +61,13 @@ namespace PROGCS05_Dion.Controllers
          * */
         public ActionResult EditRoom(int id) {
             var r_edit = roomRepository.GetRoomByID(id);
+            ViewBag.cDrop = d.cDrop;
             return View(r_edit);
         }
 
         [HttpPost]
         [ActionName("EditRoom")]
         public ActionResult EditRoom(Room room) {
-
-            foreach (Booking b in room.BookingList)
-            {
-                b.Capaciteit = room.Capaciteit;
-                
-            }
-
             if (room != null) { roomRepository.Update(room); }
 
             return RedirectToAction("DetailsRoom", new { id = room.Id});

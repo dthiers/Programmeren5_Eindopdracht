@@ -81,7 +81,7 @@
                 @Html.ActionLink("Edit", "EditGuest", new { id = item.Id }) |
                 @Html.ActionLink("Details", "DetailsGuest", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "DeleteGuest", new { id = item.Id })
-                @Html.ActionLink("Show booking", "DetailsBooking", "Booking", new { id = item.Id }, null)
+                @Html.ActionLink("Show booking", "DetailsBooking", "Booking", new { id = item.BookingId }, null)
             </td>
         </tr>
     }

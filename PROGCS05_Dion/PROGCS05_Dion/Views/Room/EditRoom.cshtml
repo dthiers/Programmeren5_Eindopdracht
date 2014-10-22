@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.Capaciteit)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Capaciteit)
+            @Html.DropDownListFor(model => model.Capaciteit, new SelectList(ViewBag.cDrop, "value", "text"))
             @Html.ValidationMessageFor(model => model.Capaciteit)
         </div>
 
@@ -30,7 +30,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ShowAllBookings")
+    @Html.ActionLink("Back to List",  "ShowAllRooms")
 </div>
 
 @section Scripts {

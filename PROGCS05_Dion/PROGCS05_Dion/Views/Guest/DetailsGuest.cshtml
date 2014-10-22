@@ -80,6 +80,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "EditGuest", new { id = Model.Id, bookingId = Model.BookingId}) |
     @Html.ActionLink("Home", "Index", "Hotel")
 </p>
