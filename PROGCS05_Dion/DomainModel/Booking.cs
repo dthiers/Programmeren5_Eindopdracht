@@ -31,31 +31,13 @@ namespace DomainModel
         [ForeignKey("RoomId")]
         public virtual Room kamer { get; set; }
 
-        [Required]
-        public string Voornaam { get; set; }
-        public string Tussenvoegsel { get; set; }
-        [Required]
-        public string Achternaam { get; set; }
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> GeboorteDatum { get; set; }
-        [Required]
-        [Display(Name = "Man of Vrouw")]
-        public string ManOfVrouw { get; set; }
-        [Required]
-        public string Adres { get; set; }
-        [Required]
-        public string Postcode { get; set; }
-        [Required]
-        public string Woonplaats { get; set; }
-        public string Email { get; set; }
         public int Prijs { get; set; }
         [Display(Name="Factuuradres")]
         public int FactuurNummer { get; set; }
         public string BankrekeningNummer { get; set; }
         public int Capaciteit { get; set; }
 
+        public int GuestId { get; set; }
         public virtual ICollection<Guest> GuestList { get; set; }  
     }
 }

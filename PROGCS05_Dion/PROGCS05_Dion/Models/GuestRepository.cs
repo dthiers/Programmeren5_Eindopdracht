@@ -72,23 +72,27 @@ namespace PROGCS05_Dion.Models
             }
         }
 
-        public void AddBookerAsGuest(Booking booking)
+        public Booking AddBookerAsGuest(InformationViewModel guest, Booking booking)
         {
             Guest g = new Guest();
 
             g.BookingId = booking.Id;
-            g.Voornaam = booking.Voornaam;
-            g.Tussenvoegsel = booking.Tussenvoegsel;
-            g.Achternaam = booking.Achternaam;
-            g.GeboorteDatum = booking.GeboorteDatum;
-            g.ManOfVrouw = booking.ManOfVrouw;
-            g.Adres = booking.Adres;
-            g.Postcode = booking.Postcode;
-            g.Woonplaats = booking.Woonplaats;
-            g.Email = booking.Email;
+            g.Voornaam = guest.Voornaam;
+            g.Tussenvoegsel = guest.Tussenvoegsel;
+            g.Achternaam = guest.Achternaam;
+            g.GeboorteDatum = guest.GeboorteDatum;
+            g.ManOfVrouw = guest.ManOfVrouw;
+            g.Adres = guest.Adres;
+            g.Postcode = guest.Postcode;
+            g.Woonplaats = guest.Woonplaats;
+            g.Email = guest.Email;
 
             dbContext.Guests.Add(g);
             dbContext.SaveChanges();
+
+            booking.GuestId = g.Id;
+
+            return booking;
         }
     }
 }

@@ -247,7 +247,6 @@
     <Content Include="Views\Room\CreateRoom.cshtml" />
     <Content Include="Views\Booking\CreateBooking.cshtml" />
     <Content Include="Views\Booking\ChooseRoom.cshtml" />
-    <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
     <Content Include="Views\Booking\Invoice.cshtml" />
     <Content Include="Views\Booking\BookedRoom.cshtml" />
     <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />
@@ -260,6 +259,7 @@
     <Content Include="Views\Guest\DeleteGuest.cshtml" />
     <Content Include="Views\Guest\DetailsGuest.cshtml" />
     <Content Include="Views\Guest\ShowAllGuests.cshtml" />
+    <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
