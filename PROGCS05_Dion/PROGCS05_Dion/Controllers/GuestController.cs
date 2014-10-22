@@ -6,30 +6,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace PROGCS05_Dion.Controllers
-{
-    public class GuestController : Controller
-    {
+namespace PROGCS05_Dion.Controllers {
+    public class GuestController : Controller {
         private GuestRepository guestRepository;
 
-        public GuestController()
-        {
+        public GuestController() {
             guestRepository = new GuestRepository();
         }
 
         /*
         * Show all guests
         * */
-        public ActionResult ShowAllGuests()
-        {
+        public ActionResult ShowAllGuests() {
             return View(guestRepository.GetAll());
         }
 
         /*
          * Show details for guest by Id
          * */
-        public ActionResult DetailsGuest(int id)
-        {
+        public ActionResult DetailsGuest(int id) {
             var g_details = guestRepository.GetGuestByID(id);
             return View(g_details);
         }
@@ -37,19 +32,17 @@ namespace PROGCS05_Dion.Controllers
         /*
          * Create new guest
          * */
-        public ActionResult CreateGuest(int bookingId)
-        {
+        public ActionResult CreateGuest(int bookingId) {
             TempData["BookingId"] = bookingId;
             return View(guestRepository.Get());
         }
 
         [HttpPost]
         [ActionName("CreateGuest")]
-        public ActionResult CreatRoomPost(Guest guest)
-        {
+        public ActionResult CreatRoomPost(Guest guest) {
             if (guest != null) {
                 guest.BookingId = (int)TempData["BookingId"];
-                guestRepository.Create(guest); 
+                guestRepository.Create(guest);
             }
             return RedirectToAction("ShowAllGuests");
         }
@@ -57,16 +50,14 @@ namespace PROGCS05_Dion.Controllers
         /*
          * Edit guest
          * */
-        public ActionResult EditGuest(int id)
-        {
+        public ActionResult EditGuest(int id) {
             var r_edit = guestRepository.GetGuestByID(id);
             return View(r_edit);
         }
 
         [HttpPost]
         [ActionName("EditGuest")]
-        public ActionResult EditGuest(Guest guest)
-        {
+        public ActionResult EditGuest(Guest guest) {
 
             if (guest != null) { guestRepository.Update(guest); }
 
@@ -76,16 +67,14 @@ namespace PROGCS05_Dion.Controllers
         /*
          * Delete guest by Id
          * */
-        public ActionResult DeleteGuest(int id)
-        {
+        public ActionResult DeleteGuest(int id) {
             var g_delete = guestRepository.GetGuestByID(id);
             return View(g_delete);
         }
 
         [HttpPost]
         [ActionName("DeleteGuest")]
-        public ActionResult DeleteGuestPost(int id)
-        {
+        public ActionResult DeleteGuestPost(int id) {
             var g_delete = guestRepository.GetGuestByID(id);
             if (g_delete != null) { guestRepository.Delete(g_delete); }
 

@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\BookingController.cs" />
@@ -143,7 +144,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BookingRepository.cs" />
+    <Compile Include="Models\GuestRepository.cs" />
     <Compile Include="Models\IBookingRepository.cs" />
+    <Compile Include="Models\IGuestRepository.cs" />
     <Compile Include="Models\InformationViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\IRoomRepository.cs" />

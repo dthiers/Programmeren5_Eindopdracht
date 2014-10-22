@@ -9,5 +9,6 @@ namespace PROGCS05_Dion.Controllers {
     public class DatabaseContext : DbContext{
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Booking> Bookingen { get; set; }
+        public DbSet<Guest> Guests { get; set; }
     }
 }
