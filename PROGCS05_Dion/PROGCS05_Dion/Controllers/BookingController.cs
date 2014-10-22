@@ -216,7 +216,6 @@ namespace PROGCS05_Dion.Controllers
            
             var booking = new Booking();
 
-            booking.Room = room;
             booking.StartDatum = startDate;
             booking.EindDatum = endDate;
             booking.RoomId = room.Id;
