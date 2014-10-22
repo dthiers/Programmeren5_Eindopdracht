@@ -11,6 +11,13 @@
     <legend>Booking</legend>
 
     <div class="display-label">
+         @Html.DisplayNameFor(model => model.Voornaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Voornaam)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.Tussenvoegsel)
     </div>
     <div class="display-field">
@@ -78,6 +85,20 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.CheckOutDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Kamer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Kamer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Prijs)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Prijs)
     </div>
 </fieldset>
 @using (Html.BeginForm()) {

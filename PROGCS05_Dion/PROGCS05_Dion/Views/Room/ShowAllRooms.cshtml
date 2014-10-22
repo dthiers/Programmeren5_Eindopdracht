@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DomainModel.Room>
+
+@{
+    ViewBag.Title = "ShowAllRooms";
+}
+
+<h2>ShowAllRooms</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateRoom")
+</p>
+<p>
+    @Html.ActionLink("Home", "Index", "Hotel")
+</p>
+<table>
+    <tr>
+        <th>
+            Room #
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capaciteit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Capaciteit)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditRoom", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsRoom", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteRoom", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

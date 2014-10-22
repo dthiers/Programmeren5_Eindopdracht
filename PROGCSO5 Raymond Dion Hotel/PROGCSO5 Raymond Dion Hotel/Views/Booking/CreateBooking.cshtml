@@ -6,7 +6,8 @@
 
 <h2>CreateBooking</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -101,6 +102,22 @@
             @Html.ValidationMessageFor(model => model.CheckOutDatum)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Kamer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Kamer)
+            @Html.ValidationMessageFor(model => model.Kamer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Prijs)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Prijs)
+            @Html.ValidationMessageFor(model => model.Prijs)
+        </div>
+
         <p>
             <input type="submit" value="Create" />
         </p>
@@ -108,7 +125,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ShowBookings")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

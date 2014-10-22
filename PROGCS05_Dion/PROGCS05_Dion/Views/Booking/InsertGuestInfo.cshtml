@@ -1,0 +1,108 @@
+﻿@model PROGCS05_Dion.InformationViewModel
+
+@{
+    ViewBag.Title = "InsertGuestInfo";
+}
+
+<h2>InsertGuestInfo</h2>
+
+@using (Html.BeginForm("BookedRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>InformationViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Voornaam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Voornaam)
+            @Html.ValidationMessageFor(model => model.Voornaam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tussenvoegsel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tussenvoegsel)
+            @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Achternaam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Achternaam)
+            @Html.ValidationMessageFor(model => model.Achternaam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GeboorteDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GeboorteDatum)
+            @Html.ValidationMessageFor(model => model.GeboorteDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManOfVrouw)
+        </div>
+        <div class="editor-field">
+           @Html.DropDownListFor(model => model.ManOfVrouw, new SelectList(ViewBag.sDrop, "value", "text"))
+            @Html.ValidationMessageFor(model => model.ManOfVrouw)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adres)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Adres)
+            @Html.ValidationMessageFor(model => model.Adres)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Postcode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Postcode)
+            @Html.ValidationMessageFor(model => model.Postcode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Woonplaats)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Woonplaats)
+            @Html.ValidationMessageFor(model => model.Woonplaats)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Bankrekeningnummer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Bankrekeningnummer)
+            @Html.ValidationMessageFor(model => model.Bankrekeningnummer)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Cancel", "Index", "Hotel")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
