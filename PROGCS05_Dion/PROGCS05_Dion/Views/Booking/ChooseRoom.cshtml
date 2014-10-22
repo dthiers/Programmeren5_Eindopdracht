@@ -28,7 +28,7 @@
             @Html.DisplayFor(modelItem => item.Capaciteit)
         </td>
         <td>
-            @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity, errorMessage = "" }) |
+            @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }) |
         </td>
     </tr>
 }

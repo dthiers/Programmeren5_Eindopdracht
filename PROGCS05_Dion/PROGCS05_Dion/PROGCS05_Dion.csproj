@@ -245,7 +245,6 @@
     <Content Include="Views\Booking\CreateBooking.cshtml" />
     <Content Include="Views\Booking\ChooseRoom.cshtml" />
     <Content Include="Views\Booking\InsertGuestInfo.cshtml" />
-    <Content Include="Views\Booking\BookRoom.cshtml" />
     <Content Include="Views\Booking\Invoice.cshtml" />
     <Content Include="Views\Booking\BookedRoom.cshtml" />
     <Content Include="Views\Booking\ShowBookingsForPeriod.cshtml" />

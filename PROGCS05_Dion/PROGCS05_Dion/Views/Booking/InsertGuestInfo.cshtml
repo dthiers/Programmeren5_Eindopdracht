@@ -6,8 +6,6 @@
 
 <h2>InsertGuestInfo</h2>
 
-<h3>@ViewBag.ErrorMessage</h3>
-
 @using (Html.BeginForm("BookedRoom", "Booking", new { roomId = ViewBag.RoomId, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }))
 {
     @Html.AntiForgeryToken()

@@ -73,7 +73,7 @@ namespace PROGCS05_Dion.Controllers
             }
         }
 
-        public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity, string errorMessage)
+        public ActionResult InsertGuestInfo(int roomId, DateTime startDate, DateTime endDate, int capacity)
         {
             InformationViewModel model = new InformationViewModel();
 
@@ -82,12 +82,12 @@ namespace PROGCS05_Dion.Controllers
             model.BookingInformation.BeginDatum = beginDatum;
             model.BookingInformation.EindDatum = eindDatum;
 
+            Als ik in de andere ActionResult kom, dan is alles ingevuld behalve de begin en eind datum die je in het begin moest kiezen
              * */
             ViewBag.RoomId = roomId;
             ViewBag.StartDate = startDate;
             ViewBag.EndDate = endDate;
             ViewBag.Capacity = capacity;
-            ViewBag.ErrorMessage = errorMessage;
 
             return View(model);
         }
@@ -122,13 +122,16 @@ namespace PROGCS05_Dion.Controllers
 
                 booking.Prijs = prijs;
 
+                // Het idee was om de booking mee te geven in zonder TempData, maar dat lukte niet omdat het anders null terug gaf
+                // op sommige plekken.
+
                 TempData["booking"] = booking;
                 //Op het einde toon ik de opgeslage booking aan de gebruiker
 
                 return View(booking);
             }
             else {
-                return RedirectToAction("InsertGuestInfo", new { roomId = roomId, startDate = startDate, endDate = endDate, capacity = capacity, errorMessage = "Uw IBAN moet 10 karakters bevatten!"});
+                return RedirectToAction("InsertGuestInfo", new { roomId = roomId, startDate = startDate, endDate = endDate, capacity = capacity });
             }
         }
 

@@ -12,6 +12,7 @@
     <div class="display-label">
          @Html.DisplayNameFor(model => model.StartDatum)
     </div>
+
     <div class="display-field">
         @Html.DisplayFor(model => model.StartDatum)
     </div>
@@ -102,5 +103,5 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", "Hotel")
+    @Html.ActionLink("Home", "Index", "Hotel")
 </p>
