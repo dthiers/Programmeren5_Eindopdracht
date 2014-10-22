@@ -100,8 +100,28 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Prijs)
     </div>
+
+    <div>
+        <h3>Guests</h3>
+    </div>
+
+    <div>
+        @foreach (var item in (Model.GuestList)) {
+            <table>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("DetailsGuest", "Guest", new { id = item.Id })) {
+                            <input type="submit" value="Go to: @item.Voornaam @item.Achternaam" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
+    @Html.ActionLink("Add Guest", "CreateGuest", "Guest", new { bookingId = Model.Id }, null)
     @Html.ActionLink("Home", "Index", "Hotel")
 </p>

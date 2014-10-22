@@ -12,8 +12,10 @@ namespace PROGCS05_Dion.Controllers
     public class BookingController : Controller
     {
         private BookingRepository bookingRepository;
+        private GuestRepository guestRepository;
         public BookingController() {
             bookingRepository = new BookingRepository();
+            guestRepository = new GuestRepository();
         }
 
 
@@ -151,6 +153,9 @@ namespace PROGCS05_Dion.Controllers
             int factuurNummer = Convert.ToInt32(nummer);
 
             booking.FactuurNummer = factuurNummer;
+
+            // voeg deze persoon toe als gast
+            guestRepository.AddBookerAsGuest(booking);
 
             bookingRepository.Create(booking);
             return View(booking);

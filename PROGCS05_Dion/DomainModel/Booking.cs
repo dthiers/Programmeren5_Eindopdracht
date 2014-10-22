@@ -56,5 +56,6 @@ namespace DomainModel
         public int FactuurNummer { get; set; }
         public string BankrekeningNummer { get; set; }
         public int Capaciteit { get; set; }
+        public virtual ICollection<Guest> GuestList { get; set; }
     }
 }
