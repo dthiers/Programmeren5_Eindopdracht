@@ -50,10 +50,14 @@ namespace PROGCS05_Dion.Controllers
             if (booking.EindDatum <= booking.BeginDatum) {
                 return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "Reverse spacetimecontinuum doesn't exist" });
             }
-            
+
             int capacity = Convert.ToInt32(booking.Capaciteit);
             var model = bookingRepository.GetRooms().Include(m => m.BookingList).Where(k => k.Capaciteit == capacity);
 
+            var model = bookingRepository.GetRooms()
+                    .Include(m => m.BookingList)
+                    .Where(k => k.Capaciteit == capacity);
+            
             ViewBag.StartDate = booking.BeginDatum;
             ViewBag.EndDate = booking.EindDatum;
             ViewBag.Capacity = booking.Capaciteit;
@@ -69,9 +73,9 @@ namespace PROGCS05_Dion.Controllers
                 foreach (Room empty in emptyRooms) {
                     if (filled.Id == empty.Id) {
                         allRooms.Remove(filled);
-                    }
                 }
             }
+                    }
 
             foreach (Room filledRoom in allRooms) {
                 Boolean available = true;
@@ -84,20 +88,20 @@ namespace PROGCS05_Dion.Controllers
                         bookedBooking.Id,
                         filledRoom.Id)) {
                         available = false;
-                    }
+                            }
                     if (available) {
                         availableRooms.Add(filledRoom);
-                    }
-                }
-            }
+                                        }
+                                    }
+                                }
             // Lege kamers toevoegen aan de lijst die getoond wordt
             foreach (Room emptyRoom in emptyRooms) {
                 availableRooms.Add(emptyRoom);
-            }
+                                }
             // Als de lijst leeg is, dan zelfde view opnieuw laden
             if (availableRooms.Count == 0) {
                 return RedirectToAction("CreateBooking", "Booking", new { errorMessage = "No room available in that period of time" });
-            }
+                            }
             // Anders naar de volgende view met de beschikbare kamers
             return View(availableRooms);
            
@@ -197,6 +201,9 @@ namespace PROGCS05_Dion.Controllers
             booking.Prijs = nieuwPrijs;
 
             var b_edit = bookingRepository.Update(booking, roomId);
+
+            Guest guest = guestRepository.GetGuestByID(booking.Id);
+      //      guestRepository.Update()
             return RedirectToAction("ShowAllBookings");
         }
 
