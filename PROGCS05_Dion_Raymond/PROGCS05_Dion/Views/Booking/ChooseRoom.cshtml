@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DomainModel.Room>
+
+@{
+    ViewBag.Title = "ChooseRoom";
+}
+
+<h2>ChooseRoom</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateRoom", "Room")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capaciteit)
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capaciteit)
+            </td>
+            <td>
+                @Html.ActionLink("Book!", "InsertGuestInfo", new { roomId = item.Id, startDate = ViewBag.StartDate, endDate = ViewBag.EndDate, capacity = ViewBag.Capacity }) |
+            </td>
+        </tr>
+}
+
+</table>
+
+@Html.ActionLink("Back", "CreateBooking", "Booking")

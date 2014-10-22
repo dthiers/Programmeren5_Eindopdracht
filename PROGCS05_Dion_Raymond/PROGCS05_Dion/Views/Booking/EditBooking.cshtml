@@ -1,0 +1,141 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "EditBooking";
+}
+
+<h2>EditBooking</h2>
+
+@using (Html.BeginForm("EditBooking", "Booking", new { roomId = Model.RoomId } )) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Booking</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDatum)
+            @Html.ValidationMessageFor(model => model.StartDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EindDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EindDatum)
+            @Html.ValidationMessageFor(model => model.EindDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Voornaam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Voornaam)
+            @Html.ValidationMessageFor(model => model.Voornaam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tussenvoegsel)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tussenvoegsel)
+            @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Achternaam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Achternaam)
+            @Html.ValidationMessageFor(model => model.Achternaam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GeboorteDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GeboorteDatum)
+            @Html.ValidationMessageFor(model => model.GeboorteDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManOfVrouw)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.ManOfVrouw, (new SelectList(ViewBag.sDrop, "value", "text")))
+            @Html.ValidationMessageFor(model => model.ManOfVrouw)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adres)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Adres)
+            @Html.ValidationMessageFor(model => model.Adres)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Postcode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Postcode)
+            @Html.ValidationMessageFor(model => model.Postcode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Woonplaats)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Woonplaats)
+            @Html.ValidationMessageFor(model => model.Woonplaats)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Capaciteit)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Capaciteit, (new SelectList(ViewBag.cDrop, "value", "text")))
+            @Html.ValidationMessageFor(model => model.Capaciteit)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BankrekeningNummer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BankrekeningNummer)
+            @Html.ValidationMessageFor(model => model.BankrekeningNummer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FactuurNummer)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.FactuurNummer)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Home", "Index", "Hotel")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
