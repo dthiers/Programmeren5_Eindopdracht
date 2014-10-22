@@ -14,7 +14,6 @@ namespace DomainModel
         [Key]
         public int Id { get; set; }
 
-
         [DataType(DataType.Date)]
         [Display(Name="Start-datum")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
