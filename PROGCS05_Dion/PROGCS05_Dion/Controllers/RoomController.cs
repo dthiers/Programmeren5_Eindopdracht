@@ -29,6 +29,15 @@ namespace PROGCS05_Dion.Controllers
             var r_details = roomRepository.GetRoomByID(id);
             return View(r_details);
         }
+        /*
+        [HttpPost]
+        [ActionName("DetailsRoom")]
+        public ActionResult DetailsRoomPost() {
+            if (Request.Form["Go to booking"] != null) {
+                return RedirectToAction("DetailsBooking", "Booking", new {id=Request})
+            }
+        }
+         * */
 
         /*
          * Create new room

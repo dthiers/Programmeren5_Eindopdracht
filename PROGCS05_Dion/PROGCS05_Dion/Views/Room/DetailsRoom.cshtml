@@ -19,13 +19,12 @@
     <table>
         <tr>
             <th>
-                Begin
+                <h3>Begindatum</h3>
             </th>
+            <th></th>
+            <th></th>
             <th>
-                Eind
-            </th>
-            <th>
-                Link
+                <h3>Einddatum</h3>
             </th>
             <th></th>
         </tr>
@@ -36,13 +35,16 @@
         <table>
             <tr>
                 <td>
-                    @Html.DisplayFor(model => item.StartDatum)
+                    @Html.DisplayFor(model => item.StartDatum) t/m
                 </td>
                 <td>
                     @Html.DisplayFor(model => item.EindDatum)
                 </td>
                 <td>
-                    @Html.ActionLink("Go to booking", "DetailsBooking", "Booking", new { id = item.Id }, null)
+                    @using (Html.BeginForm("DetailsBooking", "Booking", new { id = @item.Id })) {
+                        <input type="submit" name="Go to booking" value="Go to booking" />
+                    }
+                 
                 </td>
             </tr>
         </table>
