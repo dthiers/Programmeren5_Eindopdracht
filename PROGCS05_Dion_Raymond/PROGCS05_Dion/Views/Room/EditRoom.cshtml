@@ -1,0 +1,38 @@
+﻿@model DomainModel.Room
+
+@{
+    ViewBag.Title = "EditRoom";
+}
+
+<h2>EditRoom</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Room</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Capaciteit)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Capaciteit, new SelectList(ViewBag.cDrop, "value", "text"))
+            @Html.ValidationMessageFor(model => model.Capaciteit)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List",  "ShowAllRooms")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

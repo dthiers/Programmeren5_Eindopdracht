@@ -1,0 +1,58 @@
+﻿@model DomainModel.Room
+
+@{
+    ViewBag.Title = "DetailsRoom";
+}
+
+<h2>DetailsRoom</h2>
+
+<fieldset>
+    <legend>Room</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Capaciteit)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Capaciteit)
+    </div>
+
+    <table>
+        <tr>
+            <th>
+                <h3>Begindatum</h3>
+            </th>
+            <th></th>
+            <th></th>
+            <th>
+                <h3>Einddatum</h3>
+            </th>
+            <th></th>
+        </tr>
+      </table>
+
+    @foreach (var item in Model.BookingList)
+    {
+        <table>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.StartDatum) t/m
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.EindDatum)
+                </td>
+                <td>
+                    @using (Html.BeginForm("DetailsBooking", "Booking", new { id = @item.Id })) {
+                        <input type="submit" name="Go to booking" value="Go to booking" />
+                    }
+                 
+                </td>
+            </tr>
+        </table>
+    }
+</fieldset>
+
+
+<p>
+    @Html.ActionLink("Edit", "EditRoom", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "ShowAllRooms")
+</p>

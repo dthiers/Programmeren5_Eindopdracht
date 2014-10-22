@@ -1,0 +1,127 @@
+﻿@model DomainModel.Booking
+
+@{
+    ViewBag.Title = "DetailsBooking";
+}
+
+<h2>DetailsBooking</h2>
+
+<fieldset>
+    <legend>Booking</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDatum)
+    </div>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EindDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EindDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RoomId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RoomId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Voornaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Voornaam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Tussenvoegsel)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Tussenvoegsel)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Achternaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Achternaam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GeboorteDatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GeboorteDatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ManOfVrouw)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManOfVrouw)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Adres)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adres)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Postcode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Postcode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Woonplaats)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Woonplaats)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Prijs)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Prijs)
+    </div>
+
+    <div>
+        <h3>Guests</h3>
+    </div>
+
+    <div>
+        @foreach (var item in (Model.GuestList)) {
+            <table>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("DetailsGuest", "Guest", new { id = item.Id })) {
+                            <input type="submit" value="Go to: @item.Voornaam @item.Achternaam" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "EditBooking", new { id=Model.Id }) |
+    @Html.ActionLink("Add Guest", "CreateGuest", "Guest", new { bookingId = Model.Id }, null)
+    @Html.ActionLink("Home", "Index", "Hotel")
+</p>

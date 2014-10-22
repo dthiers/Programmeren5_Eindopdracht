@@ -1,0 +1,54 @@
+﻿@model PROGCS05_Dion.Models.StartBookingViewModel
+
+@{
+    ViewBag.Title = "CreateBooking";
+}
+
+<h2>CreateBooking</h2>
+
+<h3>@ViewBag.ErrorMessage</h3>
+
+@using (Html.BeginForm("ChooseRoom", "Booking")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>StartBookingViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BeginDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BeginDatum)
+            @Html.ValidationMessageFor(model => model.BeginDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EindDatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EindDatum)
+            @Html.ValidationMessageFor(model => model.EindDatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Capaciteit)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Capaciteit, new SelectList(ViewBag.cDrop, "value", "text"))
+            @Html.ValidationMessageFor(model => model.Capaciteit)
+        </div>
+
+        <p>
+            <input type="submit" value="Search Room" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ShowAllRooms", "Room")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
