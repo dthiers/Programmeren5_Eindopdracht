@@ -103,16 +103,22 @@ namespace PROGCS05_Dion.Controllers
                 //Ik heb nu alle informatie die ik nodig heb om een booking te maken
                 //Ik maak mijn object en sla hem op in de database
                 var booking = new Booking();
-                var booker = new Guest();
 
                 booking.StartDatum = startDate;
                 booking.EindDatum = endDate;
                 booking.RoomId = roomId;
+                booking.Voornaam = information.Voornaam;
+                booking.Tussenvoegsel = information.Tussenvoegsel;
+                booking.Achternaam = information.Achternaam;
+                booking.GeboorteDatum = information.GeboorteDatum;
+                booking.ManOfVrouw = information.ManOfVrouw;
+                booking.Adres = information.Adres;
+                booking.Postcode = information.Postcode;
+                booking.Woonplaats = information.Woonplaats;
+                booking.Email = information.Email;
                 booking.BankrekeningNummer = information.Bankrekeningnummer;
                 booking.Capaciteit = capacity;
 
-                booking = guestRepository.AddBookerAsGuest(information ,booking);
-                booker = guestRepository.GetGuestByID(booking.GuestId);
                 // bereken prijs
                 // public int CalculatePrice(int capacity, DateTime startDatum, DateTime eindDatum) {
                 int prijs = bookingRepository.CalculatePrice(capacity, booking.StartDatum, booking.EindDatum);
@@ -123,8 +129,6 @@ namespace PROGCS05_Dion.Controllers
                 // op sommige plekken.
 
                 TempData["booking"] = booking;
-                ViewBag.Voornaam = booker.Voornaam;
-                ViewBag.Achternaam = booker.Achternaam;
                 //Op het einde toon ik de opgeslage booking aan de gebruiker
 
                 return View(booking);
@@ -152,6 +156,9 @@ namespace PROGCS05_Dion.Controllers
             booking.FactuurNummer = factuurNummer;
 
             bookingRepository.Create(booking);
+
+            // voeg deze persoon toe als gast
+            guestRepository.AddBookerAsGuest(booking);
 
             return View(booking);
         }
